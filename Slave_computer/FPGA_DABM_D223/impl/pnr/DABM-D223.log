@@ -1,0 +1,33 @@
+Reading netlist file: "K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\DABM-D223.vg"
+Parsing netlist file "K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\DABM-D223.vg" completed
+WARN  (PA1003) : Invalid parameterized value 'GW1NR-4D'(DEVICE) specified for instance 'pll_u1/rpll_inst'
+Processing netlist completed
+Reading constraint file: "K:\DABM\FPGA_DABM_D223\src\DABM-D223.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+WARN  (TA1132) :  'tck_pad_i' was determined to be a clock but was not created.
+WARN  (TA1132) :  'ad_update_Flag_Z' was determined to be a clock but was not created.
+WARN  (TA1132) :  'sdpb_read_clk' was determined to be a clock but was not created.
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "K:\DABM\FPGA_DABM_D223\impl\pnr\DABM-D223.power.html" completed
+Generate file "K:\DABM\FPGA_DABM_D223\impl\pnr\DABM-D223.pin.html" completed
+Generate file "K:\DABM\FPGA_DABM_D223\impl\pnr\DABM-D223.rpt.html" completed
+Generate file "K:\DABM\FPGA_DABM_D223\impl\pnr\DABM-D223.rpt.txt" completed
+Generate file "K:\DABM\FPGA_DABM_D223\impl\pnr\DABM-D223.tr.html" completed
+Wed Jul 22 19:10:20 2026
+

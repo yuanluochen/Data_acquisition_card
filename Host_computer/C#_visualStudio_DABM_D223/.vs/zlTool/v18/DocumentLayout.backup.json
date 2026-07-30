@@ -1,0 +1,128 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "K:\\DABM\\C#_visualStudio_DABM_D223\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|k:\\dabm\\c#_visualstudio_dabm_d223\\zltool\\msgstruct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\msgstruct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|k:\\dabm\\c#_visualstudio_dabm_d223\\zltool\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|k:\\dabm\\c#_visualstudio_dabm_d223\\zltool\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|k:\\dabm\\c#_visualstudio_dabm_d223\\zltool\\adcrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\adcrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|K:\\DABM\\C#_visualStudio_DABM_D223\\zltool\\adcrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\adcrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|k:\\dabm\\c#_visualstudio_dabm_d223\\zltool\\zltool.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E4B0EAAC-3FD7-4DDA-9546-6ADE0EAE26AB}|zlTool\\zlTool.csproj|solutionrelative:zltool\\zltool.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 261,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "msgStruct.cs",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\msgStruct.cs",
+              "RelativeDocumentMoniker": "zlTool\\msgStruct.cs",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\msgStruct.cs",
+              "RelativeToolTip": "zlTool\\msgStruct.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAgwF8AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T02:12:04.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Setting.cs",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\Setting.cs",
+              "RelativeDocumentMoniker": "zlTool\\Setting.cs",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\Setting.cs",
+              "RelativeToolTip": "zlTool\\Setting.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAgwCYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T02:09:53.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Setting.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\Setting.cs",
+              "RelativeDocumentMoniker": "zlTool\\Setting.cs",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\Setting.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "zlTool\\Setting.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T02:09:47.585Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "zlTool.csproj",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\zlTool.csproj",
+              "RelativeDocumentMoniker": "zlTool\\zlTool.csproj",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\zlTool.csproj",
+              "RelativeToolTip": "zlTool\\zlTool.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-23T09:17:20.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "adcRecord.cs",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\adcRecord.cs",
+              "RelativeDocumentMoniker": "zlTool\\adcRecord.cs",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\adcRecord.cs",
+              "RelativeToolTip": "zlTool\\adcRecord.cs",
+              "ViewState": "AgIAAKQCAAAAAAAAAAAkwMICAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T09:17:20.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "adcRecord.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\adcRecord.cs",
+              "RelativeDocumentMoniker": "zlTool\\adcRecord.cs",
+              "ToolTip": "K:\\DABM\\C#_visualStudio_DABM_D223\\zlTool\\adcRecord.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "zlTool\\adcRecord.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T09:17:20.959Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 39,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

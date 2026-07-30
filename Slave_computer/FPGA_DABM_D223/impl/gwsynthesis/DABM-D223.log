@@ -1,0 +1,108 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v'
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\src\registerMap.v'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":1)
+Back to file 'K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":1)
+WARN  (EX2830) : Data object 'psram_writeEnable' is already declared("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":186)
+Previous declaration of 'psram_writeEnable' is from here("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":155)
+WARN  (EX3671) : Second declaration of 'psram_writeEnable' is ignored("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":186)
+WARN  (EX2830) : Data object 'qspi_sck_edge' is already declared("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":390)
+Previous declaration of 'qspi_sck_edge' is from here("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":386)
+WARN  (EX3671) : Second declaration of 'qspi_sck_edge' is ignored("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":390)
+WARN  (EX2830) : Data object 'psram_rwIndex' is already declared("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":411)
+Previous declaration of 'psram_rwIndex' is from here("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":151)
+WARN  (EX3671) : Second declaration of 'psram_rwIndex' is ignored("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":411)
+WARN  (EX2830) : Data object 'ad7606_data' is already declared("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":803)
+Previous declaration of 'ad7606_data' is from here("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":148)
+WARN  (EX3671) : Second declaration of 'ad7606_data' is ignored("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":803)
+Undeclared symbol 'sdpb_inData', assumed default net type 'wire'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":824)
+WARN  (EX3638) : 'sdpb_inData' is already implicitly declared on line 824("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":835)
+Undeclared symbol 'pll_lock', assumed default net type 'wire'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":855)
+WARN  (EX3638) : 'pll_lock' is already implicitly declared on line 855("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":911)
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\ad7606.v'
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\gowin_rpll\gowin_rpll.v'
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\gowin_sdpb\gowin_sdpb.v'
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\psram.v'
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\src\registerMap.v'
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v'
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_expression.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_parameter.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing included file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_parameter.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\gw_jtag.v'
+Analyzing Verilog file 'K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\gw_gao_top.v'
+Compiling module 'DABM_D223'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":3)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":227)
+WARN  (EX3791) : Expression size 17 truncated to fit in target size 5("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":472)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":734)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":741)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":767)
+Compiling module 'Gowin_SDPB'("K:\DABM\FPGA_DABM_D223\src\gowin_sdpb\gowin_sdpb.v":10)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'cea'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":854)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":856)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'oce'("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":858)
+Compiling module 'psram'("K:\DABM\FPGA_DABM_D223\src\psram.v":3)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("K:\DABM\FPGA_DABM_D223\src\psram.v":87)
+Compiling module 'ad7606'("K:\DABM\FPGA_DABM_D223\src\ad7606.v":3)
+WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("K:\DABM\FPGA_DABM_D223\src\ad7606.v":65)
+WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("K:\DABM\FPGA_DABM_D223\src\ad7606.v":82)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("K:\DABM\FPGA_DABM_D223\src\ad7606.v":139)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("K:\DABM\FPGA_DABM_D223\src\ad7606.v":223)
+Compiling module 'Gowin_rPLL'("K:\DABM\FPGA_DABM_D223\src\gowin_rpll\gowin_rpll.v":10)
+WARN  (EX3791) : Expression size 26 truncated to fit in target size 25("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":945)
+WARN  (EX1998) : Net 'reg_cmdF2ABuf[0][7]' does not have a driver("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":50)
+WARN  (EX1998) : Net 'reg_adcSdpbBuf[17][7]' does not have a driver("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":805)
+Compiling module 'gw_gao'("K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\RTL_GAO\gw_gao_top.v":1)
+Compiling module 'GW_JTAG'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\gw_jtag.v":1)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Extracting RAM for identifier '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v":74)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Trying to combine GAO to RTL design
+NOTE  (EX0101) : Current top module is "DABM_D223"
+WARN  (EX0206) : Instance "rpll_inst" 's parameter "DEVICE" value invalid("K:\DABM\FPGA_DABM_D223\src\gowin_rpll\gowin_rpll.v":40)
+[5%] Running netlist conversion ...
+WARN  (CV0016) : Input ad_doutc is unused("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":31)
+WARN  (CV0016) : Input ad_doutd is unused("K:\DABM\FPGA_DABM_D223\src\DABM-D223_MAIN.v":32)
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\DABM-D223.vg" completed
+[100%] Generate report file "K:\DABM\FPGA_DABM_D223\impl\gwsynthesis\DABM-D223_syn.rpt.html" completed
+GowinSynthesis finish

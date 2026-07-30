@@ -1,0 +1,37 @@
+{
+ "Device" : "GW1NR-4B",
+ "Files" : [
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/DABM-D223_MAIN.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/ad7606.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/gowin_rpll/gowin_rpll.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/gowin_sdpb/gowin_sdpb.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/psram.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "K:/DABM/FPGA_DABM_D223/src/registerMap.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "K:/DABM/FPGA_DABM_D223/impl/temp/rtl_parser.result",
+ "Top" : "DABM_D223",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

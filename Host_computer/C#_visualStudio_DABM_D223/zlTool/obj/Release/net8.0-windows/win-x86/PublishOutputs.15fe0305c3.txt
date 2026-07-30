@@ -1,0 +1,8 @@
+C:\Users\Administrator\Desktop\zlTool\zlTool.pdb
+C:\Users\Administrator\Desktop\zlTool\D3DCompiler_47_cor3.dll
+C:\Users\Administrator\Desktop\zlTool\PenImc_cor3.dll
+C:\Users\Administrator\Desktop\zlTool\PresentationNative_cor3.dll
+C:\Users\Administrator\Desktop\zlTool\vcruntime140_cor3.dll
+C:\Users\Administrator\Desktop\zlTool\wpfgfx_cor3.dll
+C:\Users\Administrator\Desktop\zlTool\libSkiaSharp.dll
+C:\Users\Administrator\Desktop\zlTool\zlTool.exe

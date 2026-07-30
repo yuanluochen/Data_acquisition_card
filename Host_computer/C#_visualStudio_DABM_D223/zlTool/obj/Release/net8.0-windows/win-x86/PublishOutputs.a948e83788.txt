@@ -1,0 +1,8 @@
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\zlTool.pdb
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\D3DCompiler_47_cor3.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\PenImc_cor3.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\PresentationNative_cor3.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\vcruntime140_cor3.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\wpfgfx_cor3.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\libSkiaSharp.dll
+D:\0000_work\000_zl_product\DABL-G511\zlTool免安装\zlTool.exe
