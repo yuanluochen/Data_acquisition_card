@@ -1,7 +1,8 @@
 #ifndef _AD7606_H
 #define _AD7606_H
-#include "main.h"
 #pragma pack(1)
+#include "main.h"
+
 void qspiAdcTimTask(void);
 void adc_dac_paramCalcThread(void);
 
@@ -41,6 +42,7 @@ typedef struct {
 	f2a_qspiAdc_FIFO_BufSturct fifo[500]; 
 }f2a_qspiAdcBufSturct;
 
+#pragma pack()
 #endif
 
 

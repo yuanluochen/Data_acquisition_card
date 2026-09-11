@@ -105,8 +105,6 @@ void Error_Handler(void);
 #define DOUT_2_GPIO_Port GPIOA
 #define FRAM_CS_Pin GPIO_PIN_15
 #define FRAM_CS_GPIO_Port GPIOA
-#define BOOT_HIGH_Pin GPIO_PIN_7
-#define BOOT_HIGH_GPIO_Port GPIOD
 #define LED_USB_Pin GPIO_PIN_7
 #define LED_USB_GPIO_Port GPIOB
 

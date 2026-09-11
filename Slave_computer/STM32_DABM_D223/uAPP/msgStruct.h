@@ -94,7 +94,7 @@ typedef struct {
 	 u8  cmdId;
 	 u16 frameLen;
 	 u16 dataLen;
-	 u16 dacDatas[1000];
+	 u16 dacDatas[10000];
 	 u16 crc;
 }msgSetDacDatas;
 

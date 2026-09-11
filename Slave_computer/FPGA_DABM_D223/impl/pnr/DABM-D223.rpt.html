@@ -83,7 +83,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Created Time</td>
-<td>Wed Jul 22 19:10:20 2026
+<td>Mon Aug  3 16:27:46 2026
 </td>
 </tr>
 <tr>
@@ -97,24 +97,24 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <tr>
 <td class="label">Place & Route Process</td>
 <td>Running placement:
-   Placement Phase 0: CPU time = 0h 0m 0.191s, Elapsed time = 0h 0m 0.191s
-   Placement Phase 1: CPU time = 0h 0m 0.056s, Elapsed time = 0h 0m 0.056s
-   Placement Phase 2: CPU time = 0h 0m 0.258s, Elapsed time = 0h 0m 0.258s
-   Placement Phase 3: CPU time = 0h 0m 0.833s, Elapsed time = 0h 0m 0.833s
+   Placement Phase 0: CPU time = 0h 0m 0.175s, Elapsed time = 0h 0m 0.175s
+   Placement Phase 1: CPU time = 0h 0m 0.074s, Elapsed time = 0h 0m 0.074s
+   Placement Phase 2: CPU time = 0h 0m 0.27s, Elapsed time = 0h 0m 0.27s
+   Placement Phase 3: CPU time = 0h 0m 0.579s, Elapsed time = 0h 0m 0.578s
    Total Placement: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
 Running routing:
-   Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s
-   Routing Phase 1: CPU time = 0h 0m 0.04s, Elapsed time = 0h 0m 0.04s
-   Routing Phase 2: CPU time = 0h 0m 0.442s, Elapsed time = 0h 0m 0.442s
+   Routing Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0.001s
+   Routing Phase 1: CPU time = 0h 0m 0.038s, Elapsed time = 0h 0m 0.038s
+   Routing Phase 2: CPU time = 0h 0m 0.414s, Elapsed time = 0h 0m 0.414s
    Routing Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-   Total Routing: CPU time = 0h 0m 0.482s, Elapsed time = 0h 0m 0.483s
+   Total Routing: CPU time = 0h 0m 0.453s, Elapsed time = 0h 0m 0.453s
 Generate output files:
-   CPU time = 0h 0m 0.38s, Elapsed time = 0h 0m 0.38s
+   CPU time = 0h 0m 0.371s, Elapsed time = 0h 0m 0.371s
 </td>
 </tr>
 <tr>
 <td class="label">Total Time and Memory Usage</td>
-<td>CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s, Peak memory usage = 408MB</td>
+<td>CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s, Peak memory usage = 347MB</td>
 </tr>
 </table>
 <br/>
@@ -129,12 +129,12 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">Logic</td>
-<td>1743/4608</td>
-<td>38%</td>
+<td>1783/4608</td>
+<td>39%</td>
 </tr>
 <tr>
 <td class="label">&nbsp &nbsp --LUT,ALU,ROM16</td>
-<td>1743(1445 LUT, 298 ALU, 0 ROM16)</td>
+<td>1783(1485 LUT, 298 ALU, 0 ROM16)</td>
 <td>-</td>
 </tr>
 <tr>
@@ -144,8 +144,8 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">Register</td>
-<td>1664/3624</td>
-<td>46%</td>
+<td>1471/3624</td>
+<td>41%</td>
 </tr>
 <tr>
 <td class="label">&nbsp &nbsp --Logic Register as Latch</td>
@@ -154,8 +154,8 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">&nbsp &nbsp --Logic Register as FF</td>
-<td>1654/3456</td>
-<td>48%</td>
+<td>1463/3456</td>
+<td>43%</td>
 </tr>
 <tr>
 <td class="label">&nbsp &nbsp --I/O Register as Latch</td>
@@ -164,13 +164,13 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">&nbsp &nbsp --I/O Register as FF</td>
-<td>10/168</td>
-<td>6%</td>
+<td>8/168</td>
+<td>5%</td>
 </tr>
 <tr>
 <td class="label">CLS</td>
-<td>1535/2304</td>
-<td>67%</td>
+<td>1455/2304</td>
+<td>64%</td>
 </tr>
 <tr>
 <td class="label">I/O Port</td>
@@ -199,8 +199,8 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">BSRAM</td>
-<td>2 SDPB<br/>6 SDPX9B<br/></td>
-<td>80%</td>
+<td>2 SDPB<br/>8 SDPX9B<br/></td>
+<td>100%</td>
 </tr>
 </table>
 <h2><a name="I/O_Bank_Usage_Summary">I/O Bank Usage Summary:</a></h2>
@@ -241,8 +241,8 @@ Generate output files:
 </tr>
 <tr>
 <td class="label">LW</td>
-<td>7/8</td>
-<td>88%</td>
+<td>5/8</td>
+<td>63%</td>
 </tr>
 <tr>
 <td class="label">GCLK_PIN</td>
@@ -266,7 +266,7 @@ Generate output files:
 <tr>
 <td class="label">CLK_25M_d</td>
 <td>PRIMARY</td>
-<td> LEFT</td>
+<td> LEFT RIGHT</td>
 </tr>
 <tr>
 <td class="label">sdpb_read_clk</td>
@@ -276,7 +276,7 @@ Generate output files:
 <tr>
 <td class="label">ad_update_Flag_Z</td>
 <td>PRIMARY</td>
-<td> LEFT RIGHT</td>
+<td> RIGHT</td>
 </tr>
 <tr>
 <td class="label">clk_pllOut1</td>
@@ -286,20 +286,10 @@ Generate output files:
 <tr>
 <td class="label">gw_gao_inst_0/control0[0]</td>
 <td>PRIMARY</td>
-<td> LEFT</td>
+<td> LEFT RIGHT</td>
 </tr>
 <tr>
-<td class="label">n2792_4</td>
-<td>LW</td>
-<td> -</td>
-</tr>
-<tr>
-<td class="label">n7994_3</td>
-<td>LW</td>
-<td> -</td>
-</tr>
-<tr>
-<td class="label">n5981_5</td>
+<td class="label">n5116_5</td>
 <td>LW</td>
 <td> -</td>
 </tr>
@@ -314,7 +304,7 @@ Generate output files:
 <td> -</td>
 </tr>
 <tr>
-<td class="label">_ad7606_u1/n2957_5</td>
+<td class="label">_ad7606_u1/n3242_3</td>
 <td>LW</td>
 <td> -</td>
 </tr>

@@ -184,7 +184,7 @@ void ddsDacCalc()
 		{
 			//虚拟浮点数 保留2位精度
 			_ddsDac.dacIndex[i]++;
-			_ddsDac.dacIndex[i] %= 1000;
+			_ddsDac.dacIndex[i] %= 10000;
 			_ddsDac.dacIndex[i] %= _ddsDac.ddsDatasLen;
 			_ddsDac.dacCCR[i] = _ddsDac.ddsDatas[_ddsDac.dacIndex[i]] + bias;
 		}

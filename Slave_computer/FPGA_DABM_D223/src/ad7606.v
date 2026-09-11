@@ -112,7 +112,7 @@ end
 //生成SCK计时器, 给clk时钟分频
 reg [2:0]chAddr;	//8ch, 每次读2ch, 所以共读4次, 需要2bit
 localparam  ADC_CNT_MAX  = 'd33;
-reg [2:0]updateFlag_tick;
+reg [3:0]updateFlag_tick;
 
 
 
@@ -172,8 +172,11 @@ begin
 end 
 else if((adc_clk_tick == ADC_CNT_MAX)&&(chAddr == 'd3))		//64, clk计数完成64个周期则结束一次读取, emc位宽为32bit,相当于2个16位adc值, 共64个sck边沿
 begin
-	if(updateFlag_tick<=7)
+	if(updateFlag_tick<3)
 	begin
+		ad_update_Flag <= 'b0;
+		updateFlag_tick <= updateFlag_tick + 'd1;
+		
 		if(reg_sram_adcDiffEnable[0])
 		begin
 			ad7606_data_1 <= ad7606_dataA[0] - ad7606_dataA[1];
@@ -219,8 +222,11 @@ begin
 			ad7606_data_8 <= ad7606_dataB[3];
 		end
 		
-		ad_update_Flag <= 'b1;
+	end
+	else if(updateFlag_tick<6)
+	begin
 		updateFlag_tick <= updateFlag_tick + 'd1;
+		ad_update_Flag <= 'b1;
 	end
 	else
 	begin

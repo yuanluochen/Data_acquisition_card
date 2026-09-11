@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="DABM_D223" Register="739" Alu="107" Lut="466" T_Register="1620(739)" T_Alu="273(107)" T_Lut="1406(466)" T_Bsram="8(0)">
+<Module name="DABM_D223" Register="448" Alu="107" Lut="441" T_Register="1405(448)" T_Alu="273(107)" T_Lut="1424(441)" T_Bsram="10(0)">
  <SubModule name="sdpb_u1" Bsram="4" T_Bsram="4(4)"/>
- <SubModule name="psram_u1" Register="169" Lut="218" T_Register="169(169)" T_Lut="218(218)"/>
- <SubModule name="_ad7606_u1" Register="330" Alu="152" Lut="276" T_Register="330(330)" T_Alu="152(152)" T_Lut="276(276)"/>
+ <SubModule name="psram_u1" Register="169" Lut="221" T_Register="169(169)" T_Lut="221(221)"/>
+ <SubModule name="_ad7606_u1" Register="334" Alu="152" Lut="284" T_Register="334(334)" T_Alu="152(152)" T_Lut="284(284)"/>
  <SubModule name="pll_u1"/>
- <SubModule name="gw_gao_inst_0" Register="382" Alu="14" Lut="446" Bsram="4" T_Register="382(382)" T_Alu="14(14)" T_Lut="446(446)" T_Bsram="4(4)"/>
+ <SubModule name="gw_gao_inst_0" Register="454" Alu="14" Lut="478" Bsram="6" T_Register="454(454)" T_Alu="14(14)" T_Lut="478(478)" T_Bsram="6(6)"/>
 </Module>

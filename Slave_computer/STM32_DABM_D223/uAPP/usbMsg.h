@@ -4,8 +4,8 @@
 #include "main.h"
 #pragma pack(1)
 
-#define USB_TX_BUF_LEN			2200
-#define USB_RX_BUF_LEN			2200
+#define USB_TX_BUF_LEN			22000
+#define USB_RX_BUF_LEN			22000
 
 typedef struct{
 	u16 usbRxFinishTick;

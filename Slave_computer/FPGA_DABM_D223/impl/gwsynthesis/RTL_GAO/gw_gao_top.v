@@ -1,40 +1,57 @@
 module gw_gao(
-    \reg_a2f_sram_workEnable[7] ,
-    \reg_a2f_sram_workEnable[6] ,
-    \reg_a2f_sram_workEnable[5] ,
-    \reg_a2f_sram_workEnable[4] ,
-    \reg_a2f_sram_workEnable[3] ,
-    \reg_a2f_sram_workEnable[2] ,
-    \reg_a2f_sram_workEnable[1] ,
-    \reg_a2f_sram_workEnable[0] ,
-    \rst_cnt[24] ,
-    \rst_cnt[23] ,
-    \rst_cnt[22] ,
-    \rst_cnt[21] ,
-    \rst_cnt[20] ,
-    \rst_cnt[19] ,
-    \rst_cnt[18] ,
-    \rst_cnt[17] ,
-    \rst_cnt[16] ,
-    \rst_cnt[15] ,
-    \rst_cnt[14] ,
-    \rst_cnt[13] ,
-    \rst_cnt[12] ,
-    \rst_cnt[11] ,
-    \rst_cnt[10] ,
-    \rst_cnt[9] ,
-    \rst_cnt[8] ,
-    \rst_cnt[7] ,
-    \rst_cnt[6] ,
-    \rst_cnt[5] ,
-    \rst_cnt[4] ,
-    \rst_cnt[3] ,
-    \rst_cnt[2] ,
-    \rst_cnt[1] ,
-    \rst_cnt[0] ,
-    pll_lock,
-    rst_onlyOne,
-    MODE_FPGA_RST,
+    qspi_cs,
+    \reg_adcSdpbBuf[0][7] ,
+    \reg_adcSdpbBuf[0][6] ,
+    \reg_adcSdpbBuf[0][5] ,
+    \reg_adcSdpbBuf[0][4] ,
+    \reg_adcSdpbBuf[0][3] ,
+    \reg_adcSdpbBuf[0][2] ,
+    \reg_adcSdpbBuf[0][1] ,
+    \reg_adcSdpbBuf[0][0] ,
+    \reg_adcSdpbBuf[1][7] ,
+    \reg_adcSdpbBuf[1][6] ,
+    \reg_adcSdpbBuf[1][5] ,
+    \reg_adcSdpbBuf[1][4] ,
+    \reg_adcSdpbBuf[1][3] ,
+    \reg_adcSdpbBuf[1][2] ,
+    \reg_adcSdpbBuf[1][1] ,
+    \reg_adcSdpbBuf[1][0] ,
+    sdpb_read_clk,
+    \qspi_reg_rw_addr[4] ,
+    \qspi_reg_rw_addr[3] ,
+    \qspi_reg_rw_addr[2] ,
+    \qspi_reg_rw_addr[1] ,
+    \qspi_reg_rw_addr[0] ,
+    \adc_buf_sdpb_data[7] ,
+    \adc_buf_sdpb_data[6] ,
+    \adc_buf_sdpb_data[5] ,
+    \adc_buf_sdpb_data[4] ,
+    \adc_buf_sdpb_data[3] ,
+    \adc_buf_sdpb_data[2] ,
+    \adc_buf_sdpb_data[1] ,
+    \adc_buf_sdpb_data[0] ,
+    \qspi_io[3] ,
+    \qspi_io[2] ,
+    \qspi_io[1] ,
+    \qspi_io[0] ,
+    qspi_sck,
+    qspi_rd_hl,
+    \qspi_sck_tick[7] ,
+    \qspi_sck_tick[6] ,
+    \qspi_sck_tick[5] ,
+    \qspi_sck_tick[4] ,
+    \qspi_sck_tick[3] ,
+    \qspi_sck_tick[2] ,
+    \qspi_sck_tick[1] ,
+    \qspi_sck_tick[0] ,
+    \sdpb_outAddr[7] ,
+    \sdpb_outAddr[6] ,
+    \sdpb_outAddr[5] ,
+    \sdpb_outAddr[4] ,
+    \sdpb_outAddr[3] ,
+    \sdpb_outAddr[2] ,
+    \sdpb_outAddr[1] ,
+    \sdpb_outAddr[0] ,
     clk_pllOut1,
     tms_pad_i,
     tck_pad_i,
@@ -42,84 +59,118 @@ module gw_gao(
     tdo_pad_o
 );
 
-input \reg_a2f_sram_workEnable[7] ;
-input \reg_a2f_sram_workEnable[6] ;
-input \reg_a2f_sram_workEnable[5] ;
-input \reg_a2f_sram_workEnable[4] ;
-input \reg_a2f_sram_workEnable[3] ;
-input \reg_a2f_sram_workEnable[2] ;
-input \reg_a2f_sram_workEnable[1] ;
-input \reg_a2f_sram_workEnable[0] ;
-input \rst_cnt[24] ;
-input \rst_cnt[23] ;
-input \rst_cnt[22] ;
-input \rst_cnt[21] ;
-input \rst_cnt[20] ;
-input \rst_cnt[19] ;
-input \rst_cnt[18] ;
-input \rst_cnt[17] ;
-input \rst_cnt[16] ;
-input \rst_cnt[15] ;
-input \rst_cnt[14] ;
-input \rst_cnt[13] ;
-input \rst_cnt[12] ;
-input \rst_cnt[11] ;
-input \rst_cnt[10] ;
-input \rst_cnt[9] ;
-input \rst_cnt[8] ;
-input \rst_cnt[7] ;
-input \rst_cnt[6] ;
-input \rst_cnt[5] ;
-input \rst_cnt[4] ;
-input \rst_cnt[3] ;
-input \rst_cnt[2] ;
-input \rst_cnt[1] ;
-input \rst_cnt[0] ;
-input pll_lock;
-input rst_onlyOne;
-input MODE_FPGA_RST;
+input qspi_cs;
+input \reg_adcSdpbBuf[0][7] ;
+input \reg_adcSdpbBuf[0][6] ;
+input \reg_adcSdpbBuf[0][5] ;
+input \reg_adcSdpbBuf[0][4] ;
+input \reg_adcSdpbBuf[0][3] ;
+input \reg_adcSdpbBuf[0][2] ;
+input \reg_adcSdpbBuf[0][1] ;
+input \reg_adcSdpbBuf[0][0] ;
+input \reg_adcSdpbBuf[1][7] ;
+input \reg_adcSdpbBuf[1][6] ;
+input \reg_adcSdpbBuf[1][5] ;
+input \reg_adcSdpbBuf[1][4] ;
+input \reg_adcSdpbBuf[1][3] ;
+input \reg_adcSdpbBuf[1][2] ;
+input \reg_adcSdpbBuf[1][1] ;
+input \reg_adcSdpbBuf[1][0] ;
+input sdpb_read_clk;
+input \qspi_reg_rw_addr[4] ;
+input \qspi_reg_rw_addr[3] ;
+input \qspi_reg_rw_addr[2] ;
+input \qspi_reg_rw_addr[1] ;
+input \qspi_reg_rw_addr[0] ;
+input \adc_buf_sdpb_data[7] ;
+input \adc_buf_sdpb_data[6] ;
+input \adc_buf_sdpb_data[5] ;
+input \adc_buf_sdpb_data[4] ;
+input \adc_buf_sdpb_data[3] ;
+input \adc_buf_sdpb_data[2] ;
+input \adc_buf_sdpb_data[1] ;
+input \adc_buf_sdpb_data[0] ;
+input \qspi_io[3] ;
+input \qspi_io[2] ;
+input \qspi_io[1] ;
+input \qspi_io[0] ;
+input qspi_sck;
+input qspi_rd_hl;
+input \qspi_sck_tick[7] ;
+input \qspi_sck_tick[6] ;
+input \qspi_sck_tick[5] ;
+input \qspi_sck_tick[4] ;
+input \qspi_sck_tick[3] ;
+input \qspi_sck_tick[2] ;
+input \qspi_sck_tick[1] ;
+input \qspi_sck_tick[0] ;
+input \sdpb_outAddr[7] ;
+input \sdpb_outAddr[6] ;
+input \sdpb_outAddr[5] ;
+input \sdpb_outAddr[4] ;
+input \sdpb_outAddr[3] ;
+input \sdpb_outAddr[2] ;
+input \sdpb_outAddr[1] ;
+input \sdpb_outAddr[0] ;
 input clk_pllOut1;
 input tms_pad_i;
 input tck_pad_i;
 input tdi_pad_i;
 output tdo_pad_o;
 
-wire \reg_a2f_sram_workEnable[7] ;
-wire \reg_a2f_sram_workEnable[6] ;
-wire \reg_a2f_sram_workEnable[5] ;
-wire \reg_a2f_sram_workEnable[4] ;
-wire \reg_a2f_sram_workEnable[3] ;
-wire \reg_a2f_sram_workEnable[2] ;
-wire \reg_a2f_sram_workEnable[1] ;
-wire \reg_a2f_sram_workEnable[0] ;
-wire \rst_cnt[24] ;
-wire \rst_cnt[23] ;
-wire \rst_cnt[22] ;
-wire \rst_cnt[21] ;
-wire \rst_cnt[20] ;
-wire \rst_cnt[19] ;
-wire \rst_cnt[18] ;
-wire \rst_cnt[17] ;
-wire \rst_cnt[16] ;
-wire \rst_cnt[15] ;
-wire \rst_cnt[14] ;
-wire \rst_cnt[13] ;
-wire \rst_cnt[12] ;
-wire \rst_cnt[11] ;
-wire \rst_cnt[10] ;
-wire \rst_cnt[9] ;
-wire \rst_cnt[8] ;
-wire \rst_cnt[7] ;
-wire \rst_cnt[6] ;
-wire \rst_cnt[5] ;
-wire \rst_cnt[4] ;
-wire \rst_cnt[3] ;
-wire \rst_cnt[2] ;
-wire \rst_cnt[1] ;
-wire \rst_cnt[0] ;
-wire pll_lock;
-wire rst_onlyOne;
-wire MODE_FPGA_RST;
+wire qspi_cs;
+wire \reg_adcSdpbBuf[0][7] ;
+wire \reg_adcSdpbBuf[0][6] ;
+wire \reg_adcSdpbBuf[0][5] ;
+wire \reg_adcSdpbBuf[0][4] ;
+wire \reg_adcSdpbBuf[0][3] ;
+wire \reg_adcSdpbBuf[0][2] ;
+wire \reg_adcSdpbBuf[0][1] ;
+wire \reg_adcSdpbBuf[0][0] ;
+wire \reg_adcSdpbBuf[1][7] ;
+wire \reg_adcSdpbBuf[1][6] ;
+wire \reg_adcSdpbBuf[1][5] ;
+wire \reg_adcSdpbBuf[1][4] ;
+wire \reg_adcSdpbBuf[1][3] ;
+wire \reg_adcSdpbBuf[1][2] ;
+wire \reg_adcSdpbBuf[1][1] ;
+wire \reg_adcSdpbBuf[1][0] ;
+wire sdpb_read_clk;
+wire \qspi_reg_rw_addr[4] ;
+wire \qspi_reg_rw_addr[3] ;
+wire \qspi_reg_rw_addr[2] ;
+wire \qspi_reg_rw_addr[1] ;
+wire \qspi_reg_rw_addr[0] ;
+wire \adc_buf_sdpb_data[7] ;
+wire \adc_buf_sdpb_data[6] ;
+wire \adc_buf_sdpb_data[5] ;
+wire \adc_buf_sdpb_data[4] ;
+wire \adc_buf_sdpb_data[3] ;
+wire \adc_buf_sdpb_data[2] ;
+wire \adc_buf_sdpb_data[1] ;
+wire \adc_buf_sdpb_data[0] ;
+wire \qspi_io[3] ;
+wire \qspi_io[2] ;
+wire \qspi_io[1] ;
+wire \qspi_io[0] ;
+wire qspi_sck;
+wire qspi_rd_hl;
+wire \qspi_sck_tick[7] ;
+wire \qspi_sck_tick[6] ;
+wire \qspi_sck_tick[5] ;
+wire \qspi_sck_tick[4] ;
+wire \qspi_sck_tick[3] ;
+wire \qspi_sck_tick[2] ;
+wire \qspi_sck_tick[1] ;
+wire \qspi_sck_tick[0] ;
+wire \sdpb_outAddr[7] ;
+wire \sdpb_outAddr[6] ;
+wire \sdpb_outAddr[5] ;
+wire \sdpb_outAddr[4] ;
+wire \sdpb_outAddr[3] ;
+wire \sdpb_outAddr[2] ;
+wire \sdpb_outAddr[1] ;
+wire \sdpb_outAddr[0] ;
 wire clk_pllOut1;
 wire tms_pad_i;
 wire tck_pad_i;
@@ -194,8 +245,8 @@ gw_con_top  u_icon_top(
 
 ao_top_0  u_la0_top(
     .control(control0[9:0]),
-    .trig0_i(MODE_FPGA_RST),
-    .data_i({\reg_a2f_sram_workEnable[7] ,\reg_a2f_sram_workEnable[6] ,\reg_a2f_sram_workEnable[5] ,\reg_a2f_sram_workEnable[4] ,\reg_a2f_sram_workEnable[3] ,\reg_a2f_sram_workEnable[2] ,\reg_a2f_sram_workEnable[1] ,\reg_a2f_sram_workEnable[0] ,\rst_cnt[24] ,\rst_cnt[23] ,\rst_cnt[22] ,\rst_cnt[21] ,\rst_cnt[20] ,\rst_cnt[19] ,\rst_cnt[18] ,\rst_cnt[17] ,\rst_cnt[16] ,\rst_cnt[15] ,\rst_cnt[14] ,\rst_cnt[13] ,\rst_cnt[12] ,\rst_cnt[11] ,\rst_cnt[10] ,\rst_cnt[9] ,\rst_cnt[8] ,\rst_cnt[7] ,\rst_cnt[6] ,\rst_cnt[5] ,\rst_cnt[4] ,\rst_cnt[3] ,\rst_cnt[2] ,\rst_cnt[1] ,\rst_cnt[0] ,pll_lock,rst_onlyOne}),
+    .trig0_i(qspi_cs),
+    .data_i({qspi_cs,\reg_adcSdpbBuf[0][7] ,\reg_adcSdpbBuf[0][6] ,\reg_adcSdpbBuf[0][5] ,\reg_adcSdpbBuf[0][4] ,\reg_adcSdpbBuf[0][3] ,\reg_adcSdpbBuf[0][2] ,\reg_adcSdpbBuf[0][1] ,\reg_adcSdpbBuf[0][0] ,\reg_adcSdpbBuf[1][7] ,\reg_adcSdpbBuf[1][6] ,\reg_adcSdpbBuf[1][5] ,\reg_adcSdpbBuf[1][4] ,\reg_adcSdpbBuf[1][3] ,\reg_adcSdpbBuf[1][2] ,\reg_adcSdpbBuf[1][1] ,\reg_adcSdpbBuf[1][0] ,sdpb_read_clk,\qspi_reg_rw_addr[4] ,\qspi_reg_rw_addr[3] ,\qspi_reg_rw_addr[2] ,\qspi_reg_rw_addr[1] ,\qspi_reg_rw_addr[0] ,\adc_buf_sdpb_data[7] ,\adc_buf_sdpb_data[6] ,\adc_buf_sdpb_data[5] ,\adc_buf_sdpb_data[4] ,\adc_buf_sdpb_data[3] ,\adc_buf_sdpb_data[2] ,\adc_buf_sdpb_data[1] ,\adc_buf_sdpb_data[0] ,\qspi_io[3] ,\qspi_io[2] ,\qspi_io[1] ,\qspi_io[0] ,qspi_sck,qspi_rd_hl,\qspi_sck_tick[7] ,\qspi_sck_tick[6] ,\qspi_sck_tick[5] ,\qspi_sck_tick[4] ,\qspi_sck_tick[3] ,\qspi_sck_tick[2] ,\qspi_sck_tick[1] ,\qspi_sck_tick[0] ,\sdpb_outAddr[7] ,\sdpb_outAddr[6] ,\sdpb_outAddr[5] ,\sdpb_outAddr[4] ,\sdpb_outAddr[3] ,\sdpb_outAddr[2] ,\sdpb_outAddr[1] ,\sdpb_outAddr[0] }),
     .clk_i(clk_pllOut1)
 );
 

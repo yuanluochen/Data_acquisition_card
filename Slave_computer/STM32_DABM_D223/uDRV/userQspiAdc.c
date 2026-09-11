@@ -5,9 +5,12 @@ extern TIM_HandleTypeDef htim14;
 
 f2a_qspiAdcBufSturct _qspiAdcBuf;
 void HAL_QSPI_RxCpltCallback(QSPI_HandleTypeDef *hqspi)
-{
+{    
+		
+
 		if(_adcFunctionParam.deviceWorkMode == _deviceWorkMode_onlineRecord)
 		{
+			//__disable_irq();
 			//全部全局变量一次性缓存到局部，减少RAM访问
 			const uint16_t gapCnt = _uadc.adc_BufIndexGap;
 			const uint8_t chMask = _framDatas._adcParam.adc_ch_Enable;
@@ -38,6 +41,10 @@ void HAL_QSPI_RxCpltCallback(QSPI_HandleTypeDef *hqspi)
 									continue;
 
 							uint16_t rawVal = SWAP16(_qspiAdcBuf.fifo[j].data[i]);
+							if(rawVal > 100)
+							{
+								int i123 = 0;
+							}
 							if(idx < maxPoint - 1)
 							{
 									pDst[idx++] = rawVal;
@@ -57,6 +64,7 @@ void HAL_QSPI_RxCpltCallback(QSPI_HandleTypeDef *hqspi)
 parse_end_all:
     // 仅最后写回更新后的索引，减少全局写入次数
     _uadc.adc_collectIndex = idx;
+			//__enable_irq();
 		}
 		else if((_adcFunctionParam.deviceWorkMode != _deviceWorkMode_sramRecord) 
 			&&(_adcFunctionParam.deviceWorkMode != _deviceWorkMode_getSramRecord) )
@@ -75,11 +83,13 @@ parse_end_all:
 				_dioParam.dinAll = _uadc.getAdc[8]&0xff;
 				_adcFunctionParam.global_tick_ms++;
 		}
+    
 }
 
 
 void qspiAdcTimTask(void)
 {
+
 		//如果是在线记录仪模式
 		_uadc.adc_BufIndexHis = _uadc.adc_BufIndex;
 		irq_spi_read();

@@ -195,11 +195,11 @@ begin
         psram_writeEnable <= 0;
 		reg_f2a_sramBufCnt <= 0;
 		reg_f2a_sramDataBufFlag <= 0;
-    end/*
+    end
 	else if(spi_cs_edge != 'b111)
 	begin
 	
-	end*/
+	end
 	else if(MODE_FPGA_STOP)	//复位采集
 	begin
 		psram_rwIndex <= 0;	
@@ -449,36 +449,7 @@ begin
 end
 
 
-//qspi通信寄存器地址累加
-always @ (posedge clk_pllOut1 )  
-begin
-	if((!pll_lock)||( qspi_cs  == 'b1))
-    begin
-		qspi_reg_rw_addr_d <= 0;
-		qspi_reg_rw_addr <= 0;
-	end
-	else if(qspi_reg_index_enable)
-	begin
-		if(({qspi_sck_edge[1:0],qspi_sck} == 'b001)||({qspi_sck_edge[1:0],qspi_sck} == 'b011))
-		begin
-			if((qspi_sck_tick[0]))
-			begin
-				if(qspi_reg_rw_addr_d == 16)
-				begin
-					qspi_reg_rw_addr <= 0;
-				end
-				else
-				begin
-					qspi_reg_rw_addr <= qspi_reg_rw_addr_d + 'd1;
-				end
-			end
-		end
-		else
-		begin
-			qspi_reg_rw_addr_d <= qspi_reg_rw_addr;
-		end
-	end
-end
+
 
 //qspi寄存器通信索引地址累加器使能(数据传输开始)
 always @ (posedge clk_pllOut1 )  
@@ -588,34 +559,6 @@ begin
     end
 end
 
-// 提前一拍根据地址取出ADC缓存数据，拆分关键路径
-reg [7:0] adc_buf_sdpb_data;
-always @(posedge clk_pllOut1) 
-begin
-    if(!pll_lock) 
-	begin
-        adc_buf_sdpb_data <= 8'd0;
-    end 
-	else 
-	begin
-        adc_buf_sdpb_data <= reg_adcSdpbBuf[qspi_reg_rw_addr];
-    end
-end
-
-reg [7:0] adc_buf_real_data;
-always @(posedge clk_pllOut1) 
-begin
-    if(!pll_lock) 
-	begin
-        adc_buf_real_data <= 8'd0;
-    end 
-	else 
-	begin
-        adc_buf_real_data <= reg_adcRealBuf[qspi_reg_rw_addr];
-    end
-end
-
-
 //fpga发送程序 qspi, stm32读取
 always @ (posedge clk_pllOut1 )  
 begin
@@ -623,7 +566,7 @@ begin
     begin
 		qspi_io_outBuf <= 0;
     end
-    else if((qspi_cs  == 'b0)&(qspi_dir == 1)&(MODE_STM32_READ_FIFO))
+    else if((MODE_STM32_READ_FIFO))
     begin
 		if(({qspi_sck_edge[1:0],qspi_sck} == 'b110)||({qspi_sck_edge[1:0],qspi_sck} == 'b100))
 		begin
@@ -672,84 +615,88 @@ begin
 	end
 end
 
+
+
+reg [7:0] adc_buf_real_data;
+always @(posedge clk_pllOut1) 
+begin
+    if(!pll_lock) 
+	begin
+        adc_buf_real_data <= 8'd0;
+    end 
+	else 
+	begin
+        adc_buf_real_data <= reg_adcRealBuf[qspi_reg_rw_addr];
+    end
+end
+// 提前一拍根据地址取出ADC缓存数据，拆分关键路径
+reg [7:0] adc_buf_sdpb_data;
+always @(posedge clk_pllOut1) 
+begin
+    if(!pll_lock) 
+	begin
+        adc_buf_sdpb_data <= 8'd0;
+    end 
+	else 
+	begin
+        adc_buf_sdpb_data <= reg_adcSdpbBuf[qspi_reg_rw_addr];
+    end
+end
+
+//qspi通信寄存器地址累加
+
 // qspi 在线记录仪 qspi索引地址
-reg [7:0]qspi_fifo_index;
-reg [7:0]qspi_fifo_index_d;
+reg [7:0]sdpb_outAddr;
 reg [7:0]sdpb_outAddr_d;
-
-always @ (posedge clk_pllOut1 )  
-begin
-	if((!pll_lock)||( qspi_cs  == 1'b1))
-    begin
-		qspi_fifo_index <= 0;
-		qspi_fifo_index_d <= 0;
-	end 
-	else if((({qspi_sck_edge[1:0],qspi_sck} == 'b011)||{qspi_sck_edge[1:0],qspi_sck} == 'b001))
-	begin
-		if((qspi_fifo_index < 34))
-		begin
-			qspi_fifo_index <= qspi_fifo_index_d + 1'd1;
-		end
-	end
-	else if(({qspi_sck_edge[1:0],qspi_sck} == 'b100)||({qspi_sck_edge[1:0],qspi_sck} == 'b110))
-	begin
-		if(qspi_sck_tick == 9)
-		begin
-			qspi_fifo_index <= 'd0;
-			qspi_fifo_index_d <= 'd0;
-		end
-		else
-		if(qspi_fifo_index == 'd34)
-		begin
-			qspi_fifo_index <= 'd0;
-			qspi_fifo_index_d <= 'd0;
-		end
-		else
-		begin
-			qspi_fifo_index_d <= qspi_fifo_index;
-		end
-	end
-end
-
-reg [2:0]sdpb_read_clk_wait;
-always @ (posedge clk_pllOut1 )  
-begin
-	if((!pll_lock)||( qspi_cs == 1'b1))
-    begin
-		sdpb_outAddr <= 0;
-		sdpb_outAddr_d <= 0;
-		sdpb_read_clk <= 1;
-		sdpb_read_clk_wait <= 0;
-	end 
-	else if((({qspi_sck_edge[1:0],qspi_sck} == 'b000)))
-	begin
-		if(qspi_sck_tick == 8)
-		begin
-			sdpb_outAddr <= qspi_reg_start_addr[7:0];
-			sdpb_read_clk <= 0;
-			sdpb_read_clk_wait <= 'd0;
-		end
-		else if(qspi_fifo_index == 'd34)
-		begin
-			sdpb_outAddr <= sdpb_outAddr_d + 1;
-			sdpb_read_clk <= 0;
-			sdpb_read_clk_wait <= 'd0;
-		end
-	end
-	else if(sdpb_read_clk_wait <'d2)
-	begin
-		sdpb_read_clk_wait <= sdpb_read_clk_wait + 'd1;
-		sdpb_read_clk <= 0;
-	end
-	else
-	begin
-		sdpb_read_clk <= 1;
-		sdpb_outAddr_d <= sdpb_outAddr;
-	end
-end
-
 reg [7:0]sdpb_inAddr;
 reg [7:0]sdpb_inAddr_d;
+
+always @ (posedge clk_pllOut1 )  
+begin
+	if((!pll_lock)||( qspi_cs  == 'b1))
+    begin
+		qspi_reg_rw_addr_d <= 0;
+		qspi_reg_rw_addr <= 0;
+		sdpb_read_clk <= 0;
+		sdpb_outAddr <= 0;
+		sdpb_outAddr_d <= 0;
+	end
+	else if(qspi_sck_tick == 8)
+	begin
+		sdpb_outAddr <= qspi_reg_start_addr[7:0];
+		sdpb_outAddr_d <= qspi_reg_start_addr[7:0];
+	end
+	else if(qspi_sck_tick == 9)
+	begin
+		sdpb_read_clk <= 1;
+	end
+	else if(qspi_reg_index_enable)
+	begin
+		if(({qspi_sck_edge[1:0],qspi_sck} == 'b001)||({qspi_sck_edge[1:0],qspi_sck} == 'b011))
+		begin
+			if((qspi_sck_tick[0]))
+			begin
+				if(qspi_reg_rw_addr_d == 16)
+				begin
+					sdpb_read_clk <= 1;
+					qspi_reg_rw_addr <= 0;
+					sdpb_outAddr_d <= sdpb_outAddr;
+				end
+				else
+				begin
+					sdpb_read_clk <= 0;
+					qspi_reg_rw_addr <= qspi_reg_rw_addr_d + 'd1;
+					sdpb_outAddr <= sdpb_outAddr_d + 1;
+				end
+			end
+		end
+		else
+		begin
+			qspi_reg_rw_addr_d <= qspi_reg_rw_addr;
+		end
+	end
+end
+
 
 always@(posedge clk_pllOut1) 
 	begin
@@ -768,15 +715,15 @@ always@(posedge clk_pllOut1)
 	end
 end
 
-reg [7:0]reg_adcRealBuf[0:17];	//STM32即时读取当前adc值(实时值)
-
+wire [7:0]reg_adcRealBuf[0:17];	//STM32即时读取当前adc值(实时值)
+/*
 always@(posedge clk_pllOut1) 
 	begin
 	if (!pll_lock||( qspi_cs  == 'b0))
 	begin     
 
 	end 
-	else if(!ad_update_Flag)
+	else if(ad_update_Flag)
 	begin
 		{reg_adcRealBuf[1],reg_adcRealBuf[0]} <= ad7606_data[0];
 		{reg_adcRealBuf[3],reg_adcRealBuf[2]} <= ad7606_data[1];
@@ -786,10 +733,11 @@ always@(posedge clk_pllOut1)
 		{reg_adcRealBuf[11],reg_adcRealBuf[10]} <= ad7606_data[5];
 		{reg_adcRealBuf[13],reg_adcRealBuf[12]} <= ad7606_data[6];
 		{reg_adcRealBuf[15],reg_adcRealBuf[14]} <= ad7606_data[7];
-		{reg_adcRealBuf[17],reg_adcRealBuf[16]} <= din_buf;
+		{reg_adcRealBuf[17],reg_adcRealBuf[16]} <= {8'b0,din_buf};
 	end
 end
-/*
+*/
+
 assign {reg_adcRealBuf[1],reg_adcRealBuf[0]} = ad7606_data[0];
 assign {reg_adcRealBuf[3],reg_adcRealBuf[2]} = ad7606_data[1];
 assign {reg_adcRealBuf[5],reg_adcRealBuf[4]} = ad7606_data[2];
@@ -799,11 +747,12 @@ assign {reg_adcRealBuf[11],reg_adcRealBuf[10]} = ad7606_data[5];
 assign {reg_adcRealBuf[13],reg_adcRealBuf[12]} = ad7606_data[6];
 assign {reg_adcRealBuf[15],reg_adcRealBuf[14]} = ad7606_data[7];
 assign {reg_adcRealBuf[17],reg_adcRealBuf[16]} = din_buf;
-*/
+
 wire [15:0]ad7606_data[0:7];
 
 wire [7:0]reg_adcSdpbBuf[0:17];	//STM32即时读取当前adc值(实时值)
 // 新增RAM输出缓存寄存器
+/*
 reg [135:0] sdpb_outData_reg;
 always @(posedge clk_pllOut1) 
 begin
@@ -812,14 +761,14 @@ begin
     else
         sdpb_outData_reg <= sdpb_outData;
 end
-
+*/
 // assign改用寄存后数据，消除RAM异步长组合
 assign {
-    reg_adcSdpbBuf[16],reg_adcSdpbBuf[15],reg_adcSdpbBuf[14],reg_adcSdpbBuf[13],
+    reg_adcSdpbBuf[17],reg_adcSdpbBuf[16],reg_adcSdpbBuf[15],reg_adcSdpbBuf[14],reg_adcSdpbBuf[13],
     reg_adcSdpbBuf[12],reg_adcSdpbBuf[11],reg_adcSdpbBuf[10],reg_adcSdpbBuf[9],
     reg_adcSdpbBuf[8],reg_adcSdpbBuf[7],reg_adcSdpbBuf[6],reg_adcSdpbBuf[5],
     reg_adcSdpbBuf[4],reg_adcSdpbBuf[3],reg_adcSdpbBuf[2],reg_adcSdpbBuf[1],reg_adcSdpbBuf[0]
-} = sdpb_outData_reg;
+} = sdpb_outData;
 
 assign sdpb_inData = {
 din_buf,
@@ -832,9 +781,10 @@ ad7606_data[2],
 ad7606_data[1],
 ad7606_data[0]
 };
+
 wire [135:0]sdpb_inData;
 
-reg [7:0]sdpb_outAddr;
+
 reg sdpb_read_clk;
 wire [135:0]sdpb_outData;
 
@@ -845,7 +795,7 @@ wire fifo_empty,fifo_full;
  .din(sdpb_inData), 
  .dout(sdpb_outData), 
  
- .clka(!ad_update_Flag),//写入时钟
+ .clka(ad_update_Flag),//写入时钟
  .clkb(sdpb_read_clk), //读取时钟
  
  .ada(sdpb_inAddr), //写入地址
@@ -858,7 +808,7 @@ wire fifo_empty,fifo_full;
  .oce(1)
 
  );
-
+ 
 
 psram psram_u1(
 	.psram_cs(psram_cs_u1_a),
@@ -940,7 +890,7 @@ begin
 		rst_cnt <= 'd0;
 		rst_onlyOne <= 'b1;
 	end
-    else if( rst_cnt < 'd1_000_000)
+    else if(rst_cnt < 'd1_000_000)
 	begin
         rst_cnt <= rst_cnt + 'd1;
 		pll_lock <= 'd0;

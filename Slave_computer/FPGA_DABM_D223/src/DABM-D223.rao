@@ -2,52 +2,80 @@
 <GAO_CONFIG>
     <Version>3.0</Version>
     <Mode>Standard</Mode>
-    <AoCore index="0" sample_clock="clk_pllOut1" trig_type="0" storage_depth="2048" window_num="1" capture_amount="1024" implementation="0" trigger_pos="10" module_name="DABM_D223" force_trigger_by_falling_edge="false" capture_init_data_enabled="false">
+    <AoCore index="0" sample_clock="clk_pllOut1" trig_type="0" storage_depth="2048" window_num="1" capture_amount="2048" implementation="0" trigger_pos="10" module_name="DABM_D223" force_trigger_by_falling_edge="false" capture_init_data_enabled="false">
         <SignalList>
-            <Bus capture_enable="true" name="reg_a2f_sram_workEnable[7:0]">
-                <Signal>reg_a2f_sram_workEnable[7]</Signal>
-                <Signal>reg_a2f_sram_workEnable[6]</Signal>
-                <Signal>reg_a2f_sram_workEnable[5]</Signal>
-                <Signal>reg_a2f_sram_workEnable[4]</Signal>
-                <Signal>reg_a2f_sram_workEnable[3]</Signal>
-                <Signal>reg_a2f_sram_workEnable[2]</Signal>
-                <Signal>reg_a2f_sram_workEnable[1]</Signal>
-                <Signal>reg_a2f_sram_workEnable[0]</Signal>
+            <Signal capture_enable="true">qspi_cs</Signal>
+            <Bus capture_enable="true" name="reg_adcSdpbBuf[0][7:0]">
+                <Signal>reg_adcSdpbBuf[0][7]</Signal>
+                <Signal>reg_adcSdpbBuf[0][6]</Signal>
+                <Signal>reg_adcSdpbBuf[0][5]</Signal>
+                <Signal>reg_adcSdpbBuf[0][4]</Signal>
+                <Signal>reg_adcSdpbBuf[0][3]</Signal>
+                <Signal>reg_adcSdpbBuf[0][2]</Signal>
+                <Signal>reg_adcSdpbBuf[0][1]</Signal>
+                <Signal>reg_adcSdpbBuf[0][0]</Signal>
             </Bus>
-            <Bus capture_enable="true" name="rst_cnt[24:0]">
-                <Signal>rst_cnt[24]</Signal>
-                <Signal>rst_cnt[23]</Signal>
-                <Signal>rst_cnt[22]</Signal>
-                <Signal>rst_cnt[21]</Signal>
-                <Signal>rst_cnt[20]</Signal>
-                <Signal>rst_cnt[19]</Signal>
-                <Signal>rst_cnt[18]</Signal>
-                <Signal>rst_cnt[17]</Signal>
-                <Signal>rst_cnt[16]</Signal>
-                <Signal>rst_cnt[15]</Signal>
-                <Signal>rst_cnt[14]</Signal>
-                <Signal>rst_cnt[13]</Signal>
-                <Signal>rst_cnt[12]</Signal>
-                <Signal>rst_cnt[11]</Signal>
-                <Signal>rst_cnt[10]</Signal>
-                <Signal>rst_cnt[9]</Signal>
-                <Signal>rst_cnt[8]</Signal>
-                <Signal>rst_cnt[7]</Signal>
-                <Signal>rst_cnt[6]</Signal>
-                <Signal>rst_cnt[5]</Signal>
-                <Signal>rst_cnt[4]</Signal>
-                <Signal>rst_cnt[3]</Signal>
-                <Signal>rst_cnt[2]</Signal>
-                <Signal>rst_cnt[1]</Signal>
-                <Signal>rst_cnt[0]</Signal>
+            <Bus capture_enable="true" name="reg_adcSdpbBuf[1][7:0]">
+                <Signal>reg_adcSdpbBuf[1][7]</Signal>
+                <Signal>reg_adcSdpbBuf[1][6]</Signal>
+                <Signal>reg_adcSdpbBuf[1][5]</Signal>
+                <Signal>reg_adcSdpbBuf[1][4]</Signal>
+                <Signal>reg_adcSdpbBuf[1][3]</Signal>
+                <Signal>reg_adcSdpbBuf[1][2]</Signal>
+                <Signal>reg_adcSdpbBuf[1][1]</Signal>
+                <Signal>reg_adcSdpbBuf[1][0]</Signal>
             </Bus>
-            <Signal capture_enable="true">pll_lock</Signal>
-            <Signal capture_enable="true">rst_onlyOne</Signal>
+            <Signal capture_enable="true">sdpb_read_clk</Signal>
+            <Bus capture_enable="true" name="qspi_reg_rw_addr[4:0]">
+                <Signal>qspi_reg_rw_addr[4]</Signal>
+                <Signal>qspi_reg_rw_addr[3]</Signal>
+                <Signal>qspi_reg_rw_addr[2]</Signal>
+                <Signal>qspi_reg_rw_addr[1]</Signal>
+                <Signal>qspi_reg_rw_addr[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="adc_buf_sdpb_data[7:0]">
+                <Signal>adc_buf_sdpb_data[7]</Signal>
+                <Signal>adc_buf_sdpb_data[6]</Signal>
+                <Signal>adc_buf_sdpb_data[5]</Signal>
+                <Signal>adc_buf_sdpb_data[4]</Signal>
+                <Signal>adc_buf_sdpb_data[3]</Signal>
+                <Signal>adc_buf_sdpb_data[2]</Signal>
+                <Signal>adc_buf_sdpb_data[1]</Signal>
+                <Signal>adc_buf_sdpb_data[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="qspi_io[3:0]">
+                <Signal>qspi_io[3]</Signal>
+                <Signal>qspi_io[2]</Signal>
+                <Signal>qspi_io[1]</Signal>
+                <Signal>qspi_io[0]</Signal>
+            </Bus>
+            <Signal capture_enable="true">qspi_sck</Signal>
+            <Signal capture_enable="true">qspi_rd_hl</Signal>
+            <Bus capture_enable="true" name="qspi_sck_tick[7:0]">
+                <Signal>qspi_sck_tick[7]</Signal>
+                <Signal>qspi_sck_tick[6]</Signal>
+                <Signal>qspi_sck_tick[5]</Signal>
+                <Signal>qspi_sck_tick[4]</Signal>
+                <Signal>qspi_sck_tick[3]</Signal>
+                <Signal>qspi_sck_tick[2]</Signal>
+                <Signal>qspi_sck_tick[1]</Signal>
+                <Signal>qspi_sck_tick[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="sdpb_outAddr[7:0]">
+                <Signal>sdpb_outAddr[7]</Signal>
+                <Signal>sdpb_outAddr[6]</Signal>
+                <Signal>sdpb_outAddr[5]</Signal>
+                <Signal>sdpb_outAddr[4]</Signal>
+                <Signal>sdpb_outAddr[3]</Signal>
+                <Signal>sdpb_outAddr[2]</Signal>
+                <Signal>sdpb_outAddr[1]</Signal>
+                <Signal>sdpb_outAddr[0]</Signal>
+            </Bus>
         </SignalList>
         <Triggers>
             <Trigger index="0">
                 <SignalList>
-                    <Signal>MODE_FPGA_RST</Signal>
+                    <Signal>qspi_cs</Signal>
                 </SignalList>
             </Trigger>
             <Trigger index="1"/>
@@ -67,7 +95,7 @@
             <Trigger index="15"/>
         </Triggers>
         <MatchUnits>
-            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="1" value1="0" trigger="0"/>
+            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="0" value1="0" trigger="0"/>
             <MatchUnit index="1" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="2" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="3" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
@@ -88,5 +116,5 @@
             <Expression>M0</Expression>
         </Expressions>
     </AoCore>
-    <GAO_ID>1110010010101111</GAO_ID>
+    <GAO_ID>0000110100110010</GAO_ID>
 </GAO_CONFIG>

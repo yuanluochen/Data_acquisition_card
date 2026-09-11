@@ -194,18 +194,18 @@ int main(void)
 		HAL_GPIO_WritePin(AD_RESET_GPIO_Port,AD_RESET_Pin,0);
 		nvm_data_init();
 
-		rt_thread_delay(10);
+		rt_thread_delay(200);
 		_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
 		rtos_spi_write();
-		rt_thread_delay(100);
-		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_initSram;
-		rtos_spi_write();
-		rt_thread_delay(10);
-		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_readFito;
-		rtos_spi_write();
-		rt_thread_delay(10);
-		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_stop;
-		rt_thread_delay(10);
+		rt_thread_delay(200);
+//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_initSram;
+//		rtos_spi_write();
+//		rt_thread_delay(10);
+//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
+//		rtos_spi_write();
+//		rt_thread_delay(200);
+//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_stop;
+//		rt_thread_delay(10);
 		HAL_TIM_Base_Start_IT(&htim1);
 		HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);  
 		
@@ -232,7 +232,7 @@ int main(void)
 		
 		rt_msgProcess_init();
 		rt_adcFunc_init();
-		rt_thread_delay(500);
+		rt_thread_delay(100);
 				
 		init_success = 1;
 
@@ -327,7 +327,7 @@ static void MX_QUADSPI_Init(void)
   /* USER CODE END QUADSPI_Init 1 */
   /* QUADSPI parameter configuration*/
   hqspi.Instance = QUADSPI;
-  hqspi.Init.ClockPrescaler = 30;
+  hqspi.Init.ClockPrescaler = 40;
   hqspi.Init.FifoThreshold = 1;
   hqspi.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_NONE;
   hqspi.Init.FlashSize = 31;
@@ -979,7 +979,7 @@ static void MX_GPIO_Init(void)
                           |FRAM_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin|BOOT_HIGH_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
@@ -1001,8 +1001,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : AD_RESET_Pin AD_RANGE_Pin AD_OS_Pin BOOT_HIGH_Pin */
-  GPIO_InitStruct.Pin = AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin|BOOT_HIGH_Pin;
+  /*Configure GPIO pins : AD_RESET_Pin AD_RANGE_Pin AD_OS_Pin */
+  GPIO_InitStruct.Pin = AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

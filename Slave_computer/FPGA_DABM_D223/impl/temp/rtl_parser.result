@@ -9,7 +9,7 @@
   "SubInsts" : [
    {
     "InstFile" : "K:/DABM/FPGA_DABM_D223/src/DABM-D223_MAIN.v",
-    "InstLine" : 844,
+    "InstLine" : 794,
     "InstName" : "sdpb_u1",
     "ModuleFile" : "K:/DABM/FPGA_DABM_D223/src/gowin_sdpb/gowin_sdpb.v",
     "ModuleLine" : 10,
@@ -17,7 +17,7 @@
    },
    {
     "InstFile" : "K:/DABM/FPGA_DABM_D223/src/DABM-D223_MAIN.v",
-    "InstLine" : 863,
+    "InstLine" : 813,
     "InstName" : "psram_u1",
     "ModuleFile" : "K:/DABM/FPGA_DABM_D223/src/psram.v",
     "ModuleLine" : 3,
@@ -25,7 +25,7 @@
    },
    {
     "InstFile" : "K:/DABM/FPGA_DABM_D223/src/DABM-D223_MAIN.v",
-    "InstLine" : 885,
+    "InstLine" : 835,
     "InstName" : "_ad7606_u1",
     "ModuleFile" : "K:/DABM/FPGA_DABM_D223/src/ad7606.v",
     "ModuleLine" : 3,
@@ -33,7 +33,7 @@
    },
    {
     "InstFile" : "K:/DABM/FPGA_DABM_D223/src/DABM-D223_MAIN.v",
-    "InstLine" : 914,
+    "InstLine" : 864,
     "InstName" : "pll_u1",
     "ModuleFile" : "K:/DABM/FPGA_DABM_D223/src/gowin_rpll/gowin_rpll.v",
     "ModuleLine" : 10,

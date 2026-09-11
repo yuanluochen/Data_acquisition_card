@@ -31,9 +31,9 @@ void fram_read_datas(void)
 		FramRead((u8*)&_framDatas,FRAM_BASE_ADDR,FRAM_DATA_LENGTH);
 		 
 		
-		if(_framDatas.softVersion != 0x00300001)
+		if(_framDatas.softVersion != 0x00300002)
 		{
-				_framDatas.softVersion = 0x00300001;
+				_framDatas.softVersion = 0x00300002;
 			
 				_framDatas._adcParam.adc_ch_Enable = 0xff;
 				_framDatas._adcParam.samplingRate = 500000;
@@ -73,7 +73,7 @@ void fram_read_datas(void)
 			}
 			
 			_framDatas._ddsDacParam[0].freq = 50;
-			_framDatas.dacOutRate = 20000;
+			_framDatas.dacOutRate = 10000;
 			
 			for(u8 i=0;i<6;i++)
 			{
@@ -93,7 +93,7 @@ void fram_read_datas(void)
 		
 		_framDatas._adcParam.samplingRate = _framDatas._adcParam.samplingRate > ADC_MAX_FREQ ? ADC_MAX_FREQ : _framDatas._adcParam.samplingRate;
 		_framDatas._adcParam.samplingRate = _framDatas._adcParam.samplingRate < 1 ? 1 : _framDatas._adcParam.samplingRate;
-		_framDatas.dacOutRate = _framDatas.dacOutRate > 10000 ? 10000 : _framDatas.dacOutRate;
+		_framDatas.dacOutRate = _framDatas.dacOutRate > 20000 ? 20000 : _framDatas.dacOutRate;
 		_framDatas.dacOutRate = _framDatas.dacOutRate < 1000 ? 1000 : _framDatas.dacOutRate;
 
 		for(u8 i=0;i<4;i++)

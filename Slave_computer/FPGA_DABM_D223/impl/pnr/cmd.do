@@ -4,7 +4,7 @@
 -cst K:\DABM\FPGA_DABM_D223\src\DABM-D223.cst
 -cfg K:\DABM\FPGA_DABM_D223\impl\pnr\device.cfg
 -sdc K:\DABM\FPGA_DABM_D223\src\timing_constraint.sdc
--gao_crc 1110010010101111
+-gao_crc 0000110100110010
 -bit
 -tr
 -ph
