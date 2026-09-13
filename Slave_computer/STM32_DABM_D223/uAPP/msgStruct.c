@@ -868,154 +868,206 @@ void fun_getSettingParam()
 }
 
 //开始处理USB数据
-void fun_msgProcess_task(u8* rxData)
+void fun_msgProcess_task(u8 *rxData)
 {
-		msgHead *_pRx = (msgHead*)rxData;
-	
-		if(!checkCrc16WithTail((u8*)rxData,SWAP16(_pRx->frameLen)))
-		{
-			return;
-		}
-		HAL_GPIO_TogglePin(LED_USB_GPIO_Port,LED_USB_Pin);				
-		
-		if(_pRx->msgHead != SWAP16(0x55aa))
-		{
-			//如果起始帧不为0x55aa, 则说明报文受污染, 丢弃
-		}
-		else
-		{
-			switch(_pRx->cmdId)
-			{
-				//设置adc采样范围
-				case _cmdId_setAdcRange: fun_setAdcRange(rxData);
-					break;
+  msgHead *_pRx = (msgHead *)rxData;
 
-				case _cmdId_setAdcSignalType: fun_setAdcSignalType(rxData);
-					break;
+  //CRC校验
+  if (!checkCrc16WithTail((u8 *)rxData, SWAP16(_pRx->frameLen)))
+  {
+    return;
+  }
+  //翻转电平
+  HAL_GPIO_TogglePin(LED_USB_GPIO_Port, LED_USB_Pin);
+  //判断数据包头
+  if (_pRx->msgHead != SWAP16(0x55aa))
+  {
+    // 如果起始帧不为0x55aa, 则说明报文受污染, 丢弃
+  }
+  else
+  {
+    //判断数据包指令类型
+    switch (_pRx->cmdId)
+    {
+    // 设置adc采样范围
+    case _cmdId_setAdcRange:
+      fun_setAdcRange(rxData);
+      break;
 
-				case _cmdId_setAdc_chEnable: fun_msgSetAdcChState(rxData);fun_getAdcParam();
-					break;
+    case _cmdId_setAdcSignalType:
+      fun_setAdcSignalType(rxData);
+      break;
 
-				case _cmdId_setAdc_diffEnable: fun_msgSetAdcDiffState(rxData);fun_getAdcParam();
-					break;
+    case _cmdId_setAdc_chEnable:
+      fun_msgSetAdcChState(rxData);
+      fun_getAdcParam();
+      break;
 
-				case _cmdId_getDeviceParam: fun_getAdcParam();
-					break;
+    case _cmdId_setAdc_diffEnable:
+      fun_msgSetAdcDiffState(rxData);
+      fun_getAdcParam();
+      break;
 
-				case _cmdId_setAdc_samplingRate:fun_msgSetAdcSamplingRate(rxData);fun_getAdcParam();
-					break;
+    case _cmdId_getDeviceParam:
+      fun_getAdcParam();
+      break;
 
-				case _cmdId_getAdcValue:fun_msgGetAdcValue();
-					break;
-				
-				//SRAM记录仪
-				case _cmdId_startSramRecord:fun_msgStartSramRecord(rxData);fun_getAdcParam();
-					break;
+    case _cmdId_setAdc_samplingRate:
+      fun_msgSetAdcSamplingRate(rxData);
+      fun_getAdcParam();
+      break;
 
-				case _cmdId_stopSramRecord:fun_msgStopSramRecord();
-					break;
+    case _cmdId_getAdcValue:
+      fun_msgGetAdcValue();
+      break;
 
-				case _cmdId_getSramRecordDatas:fun_getAdcParam();fun_msgReadSramRecordDatas();
-					break;
-									
-				//在线记录仪
-				case _cmdId_startOnlineRecord:fun_msgStartOnlineRecord(rxData);
-					break;
+    // SRAM记录仪
+    case _cmdId_startSramRecord:
+      fun_msgStartSramRecord(rxData);
+      fun_getAdcParam();
+      break;
 
-				case _cmdId_stopOnlineRecord:fun_msgStopOnlineRecord();
-					break;
+    case _cmdId_stopSramRecord:
+      fun_msgStopSramRecord();
+      break;
 
+    case _cmdId_getSramRecordDatas:
+      fun_getAdcParam();
+      fun_msgReadSramRecordDatas();
+      break;
 
-		//连续续记录仪
-				case _cmdId_readRecentConsecutiveDatas:fun_readRecentConsecutiveDatas();
-					break;
-				
-					//DDS信号发生器
-				case _cmdId_setDdsDacParam:fun_msgSetDdsDacParam(rxData);fun_msgGetDdsDacParam();
-					break;
+    // 在线记录仪
+    case _cmdId_startOnlineRecord:
+      fun_msgStartOnlineRecord(rxData);
+      break;
 
-				case _cmdId_setDdsDacWorkMode:fun_msgSetDdsDacWorkMode(rxData);fun_msgGetDdsDacParam();
-					break;
+    case _cmdId_stopOnlineRecord:
+      fun_msgStopOnlineRecord();
+      break;
 
-				case _cmdId_setDdsDacDatas:fun_msgSetDdsDatas(rxData);fun_msgGetDdsDacParam();
-					break;
+      // 连续续记录仪
+    case _cmdId_readRecentConsecutiveDatas:
+      fun_readRecentConsecutiveDatas();
+      break;
 
-				case _cmdId_ddsDacGetParamTotal:fun_msgGetDdsDacParam();fun_ddsDacGetCalibParam();
-					break;
-					
-				case _cmdId_ddsDacCalibPoint1:fun_setDdsDacCalibPoint1(rxData);fun_ddsDacGetCalibParam();
-					break;
-					
-				case _cmdId_ddsDacCalibPoint2:fun_setDdsDacCalibPoint2(rxData);fun_ddsDacGetCalibParam();
-					break;
-					
-				case _cmdId_ddsDacClearCalib:fun_clearDdsDacCalib(rxData);fun_ddsDacGetCalibParam();
-					break;
-					
-				case _cmdId_ddsDacGetCalibParam:fun_ddsDacGetCalibParam();
-					break;
-			
-			
-				//数字输出
-					case _cmdId_setOutputIO: fun_msgSetOutputIO(rxData);fun_msgGetIoAll();
-					break;
-				
-				case _cmdId_setPwmParam:fun_msgSetPwmParam(rxData);fun_msgGetIoAll();
-					break;
-				
-				case _cmdId_getIoAll: fun_msgGetIoAll();
-					break;
-														
-				//设置页面
-				case _cmdId_getSettingParam: fun_getSettingParam();
-					break;
-					
-				case _cmdId_settingAdcCalibPoint1:fun_setAdcCalibPoint1(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_settingAdcCalibPoint2:fun_setAdcCalibPoint2(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_settingClearAdcCalibDatas:fun_clearAdcCalib(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_settingSetAdcCalibMode:fun_enterAdcCalibMode(rxData);fun_getSettingParam();
-					break;
-					
-					
-				//修正系数 修正值
-				case _cmdId_setCorrectFactor:fun_setCorrectFactor(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_setCalibZero:fun_setCalibZero(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_sramAdutoTrigEnable: fun_sramAdutoTrigEnable(rxData);
-					break;
-					
-				case _cmdId_getCalibVolt:fun_msgGetCalibVolt();
-					break;
-									
-				case _cmdId_setRecordDelay: fun_setRecordDelay(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_setSensorUnit: fun_setSensorUnit(rxData);fun_getSettingParam();
-					break;
-					
-				case _cmdId_getSoftVersion: fun_getSettingParam();
-					break;
-					
+      // DDS信号发生器
+    case _cmdId_setDdsDacParam:
+      fun_msgSetDdsDacParam(rxData);
+      fun_msgGetDdsDacParam();
+      break;
 
-				default:break;
-			}
-		}
+    case _cmdId_setDdsDacWorkMode:
+      fun_msgSetDdsDacWorkMode(rxData);
+      fun_msgGetDdsDacParam();
+      break;
+
+    case _cmdId_setDdsDacDatas:
+      fun_msgSetDdsDatas(rxData);
+      fun_msgGetDdsDacParam();
+      break;
+
+    case _cmdId_ddsDacGetParamTotal:
+      fun_msgGetDdsDacParam();
+      fun_ddsDacGetCalibParam();
+      break;
+
+    case _cmdId_ddsDacCalibPoint1:
+      fun_setDdsDacCalibPoint1(rxData);
+      fun_ddsDacGetCalibParam();
+      break;
+
+    case _cmdId_ddsDacCalibPoint2:
+      fun_setDdsDacCalibPoint2(rxData);
+      fun_ddsDacGetCalibParam();
+      break;
+
+    case _cmdId_ddsDacClearCalib:
+      fun_clearDdsDacCalib(rxData);
+      fun_ddsDacGetCalibParam();
+      break;
+
+    case _cmdId_ddsDacGetCalibParam:
+      fun_ddsDacGetCalibParam();
+      break;
+
+      // 数字输出
+    case _cmdId_setOutputIO:
+      fun_msgSetOutputIO(rxData);
+      fun_msgGetIoAll();
+      break;
+
+    case _cmdId_setPwmParam:
+      fun_msgSetPwmParam(rxData);
+      fun_msgGetIoAll();
+      break;
+
+    case _cmdId_getIoAll:
+      fun_msgGetIoAll();
+      break;
+
+    // 设置页面
+    case _cmdId_getSettingParam:
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_settingAdcCalibPoint1:
+      fun_setAdcCalibPoint1(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_settingAdcCalibPoint2:
+      fun_setAdcCalibPoint2(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_settingClearAdcCalibDatas:
+      fun_clearAdcCalib(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_settingSetAdcCalibMode:
+      fun_enterAdcCalibMode(rxData);
+      fun_getSettingParam();
+      break;
+
+    // 修正系数 修正值
+    case _cmdId_setCorrectFactor:
+      fun_setCorrectFactor(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_setCalibZero:
+      fun_setCalibZero(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_sramAdutoTrigEnable:
+      fun_sramAdutoTrigEnable(rxData);
+      break;
+
+    case _cmdId_getCalibVolt:
+      fun_msgGetCalibVolt();
+      break;
+
+    case _cmdId_setRecordDelay:
+      fun_setRecordDelay(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_setSensorUnit:
+      fun_setSensorUnit(rxData);
+      fun_getSettingParam();
+      break;
+
+    case _cmdId_getSoftVersion:
+      fun_getSettingParam();
+      break;
+
+    default:
+      break;
+    }
+  }
 }
-
-
-
-
-
-
 
 void usbAutoUpload_thread_task()
 {
