@@ -395,11 +395,6 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Core\Inc\main.h</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -420,19 +415,9 @@
           <GroupName>uApp</GroupName>
           <Files>
             <File>
-              <FileName>typeDefine.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\typeDefine.h</FilePath>
-            </File>
-            <File>
               <FileName>adcFunction.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uAPP\adcFunction.c</FilePath>
-            </File>
-            <File>
-              <FileName>adcFunction.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\adcFunction.h</FilePath>
             </File>
             <File>
               <FileName>msgStruct.c</FileName>
@@ -440,19 +425,9 @@
               <FilePath>..\uAPP\msgStruct.c</FilePath>
             </File>
             <File>
-              <FileName>msgStruct.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\msgStruct.h</FilePath>
-            </File>
-            <File>
               <FileName>nvmData.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uAPP\nvmData.c</FilePath>
-            </File>
-            <File>
-              <FileName>nvmData.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\nvmData.h</FilePath>
             </File>
             <File>
               <FileName>usbMsg.c</FileName>
@@ -460,19 +435,9 @@
               <FilePath>..\uAPP\usbMsg.c</FilePath>
             </File>
             <File>
-              <FileName>usbMsg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\usbMsg.h</FilePath>
-            </File>
-            <File>
               <FileName>userQspiAdc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uDRV\userQspiAdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>userQspiAdc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uDRV\userQspiAdc.h</FilePath>
             </File>
             <File>
               <FileName>ddsDAC.c</FileName>
@@ -480,19 +445,9 @@
               <FilePath>..\uAPP\ddsDAC.c</FilePath>
             </File>
             <File>
-              <FileName>ddsDAC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\ddsDAC.h</FilePath>
-            </File>
-            <File>
               <FileName>dio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uAPP\dio.c</FilePath>
-            </File>
-            <File>
-              <FileName>dio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\dio.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -505,19 +460,9 @@
               <FilePath>..\uDRV\crc16.c</FilePath>
             </File>
             <File>
-              <FileName>crc16.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uDRV\crc16.h</FilePath>
-            </File>
-            <File>
               <FileName>fram.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uDRV\fram.c</FilePath>
-            </File>
-            <File>
-              <FileName>fram.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uDRV\fram.h</FilePath>
             </File>
             <File>
               <FileName>userQspi.c</FileName>
@@ -525,19 +470,9 @@
               <FilePath>..\uAPP\userQspi.c</FilePath>
             </File>
             <File>
-              <FileName>userQspi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uAPP\userQspi.h</FilePath>
-            </File>
-            <File>
               <FileName>regFPGA.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uDRV\regFPGA.c</FilePath>
-            </File>
-            <File>
-              <FileName>regFPGA.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uDRV\regFPGA.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -545,19 +480,9 @@
           <GroupName>uRTT</GroupName>
           <Files>
             <File>
-              <FileName>board.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uRtt\board.h</FilePath>
-            </File>
-            <File>
               <FileName>userThread.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\uRtt\userThread.c</FilePath>
-            </File>
-            <File>
-              <FileName>userThread.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uRtt\userThread.h</FilePath>
             </File>
           </Files>
         </Group>

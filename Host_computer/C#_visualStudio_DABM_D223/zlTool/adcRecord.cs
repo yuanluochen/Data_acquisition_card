@@ -267,15 +267,17 @@ namespace zlTool
         List<double> xAxisIndex = new List<double>();
         List<double> xDinAxisIndex = new List<double>();
 
-        List<double> showAdcRecord1 = new List<double>();
-        List<double> showAdcRecord2 = new List<double>();
-        List<double> showAdcRecord3 = new List<double>();
-        List<double> showAdcRecord4 = new List<double>();
-        List<double> showAdcRecord5 = new List<double>();
-        List<double> showAdcRecord6 = new List<double>();
-        List<double> showAdcRecord7 = new List<double>();
-        List<double> showAdcRecord8 = new List<double>();
-        List<double> showDinRecord = new List<double>();
+        double[] showAdcRecord1 = new double[10000];
+        double[] showAdcRecord2 = new double[10000];
+        double[] showAdcRecord3 = new double[10000];
+        double[] showAdcRecord4 = new double[10000];
+        double[] showAdcRecord5 = new double[10000];
+        double[] showAdcRecord6 = new double[10000];
+        double[] showAdcRecord7 = new double[10000];
+        double[] showAdcRecord8 = new double[10000];
+        UInt16[] showAdcRecordIndex = new UInt16[8];
+
+
 
         UInt32 listAxisIndex = 0;
         const UInt16 ADC_ONCE_LEN = 10000;
@@ -686,13 +688,13 @@ namespace zlTool
                                 adcEnableChState[adcEnableChNum++] = i;
                             }
                         }
-
+                        /*
                         if (((localChEnable >> 8) & 0x01) == 1)
                         {
                             adcEnableChState[adcEnableChNum++] = 8;
                             adcEnableChState[adcEnableChNum++] = 9;
                         }
-
+                        */
                         for (UInt16 i = 0; i < SWAP16(_prxData.dataLen); i++)
                         {
                             if (adcEnableChState[(i) % adcEnableChNum] == 0) { adcRecord1.Add(getCalibAdcDatas(2, 1, SWAPS16(_prxData.adcData[i]))); }
@@ -789,11 +791,15 @@ namespace zlTool
                             {
                                 adcEnableChState[adcEnableChNum++] = i;
                             }
+                            showAdcRecordIndex[i] = 0;
                         }
-
+            
+                        //生成X轴数组
+                        onlineRecordMaxLen = (UInt16)(SWAP16(_prxData.dataLen) / adcEnableChNum);
                         for (UInt16 i = 0; i < SWAP16(_prxData.dataLen); i++)
                         {
-                            if (adcEnableChState[(i) % adcEnableChNum] == 0) { adcRecord1.Add(getCalibAdcDatas(2, 1, SWAPS16(_prxData.adcData[i]))); }
+                            //最后叠加的数字为偏置
+                            if (adcEnableChState[(i ) % adcEnableChNum] == 0) { adcRecord1.Add(getCalibAdcDatas(2, 1, SWAPS16(_prxData.adcData[i]))); }
                             else if (adcEnableChState[(i) % adcEnableChNum] == 1) { adcRecord2.Add(getCalibAdcDatas(2, 2, SWAPS16(_prxData.adcData[i]))); }
                             else if (adcEnableChState[(i) % adcEnableChNum] == 2) { adcRecord3.Add(getCalibAdcDatas(2, 3, SWAPS16(_prxData.adcData[i]))); }
                             else if (adcEnableChState[(i) % adcEnableChNum] == 3) { adcRecord4.Add(getCalibAdcDatas(2, 4, SWAPS16(_prxData.adcData[i]))); }
@@ -803,64 +809,8 @@ namespace zlTool
                             else if (adcEnableChState[(i) % adcEnableChNum] == 7) { adcRecord8.Add(getCalibAdcDatas(2, 8, SWAPS16(_prxData.adcData[i]))); }
                         }
 
-                        //抽帧显示最近3秒数据
-                        UInt16 addGap = (UInt16)((SWAP32(_prxData.adcSamplingRate) / 1000));
-                        if (addGap == 0)
-                        {
-                            addGap = 1;
-                        }
-
-                        for (UInt16 i = 0; i < SWAP16(_prxData.dataLen) / adcEnableChNum; i++)
-                        {
-                            // 抽帧逻辑：每隔 addGap 组才取一次
-                            if (i % addGap != 0)
-                            {
-                                continue;
-                            }
-
-                            // 取 1 组 = 所有使能通道各 1 个点（绝对不乱）
-                            for (int chIdx = 0; chIdx < adcEnableChNum; chIdx++)
-                            {
-                                if (adcEnableChState[(chIdx) % adcEnableChNum] == 0)
-                                {
-                                    showAdcRecord1.Add(getCalibAdcDatas(2, 1, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 1)
-                                {
-                                    showAdcRecord2.Add(getCalibAdcDatas(2, 2, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 2)
-                                {
-                                    showAdcRecord3.Add(getCalibAdcDatas(2, 3, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 3)
-                                {
-                                    showAdcRecord4.Add(getCalibAdcDatas(2, 4, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 4)
-                                {
-                                    showAdcRecord5.Add(getCalibAdcDatas(2, 5, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 5)
-                                {
-                                    showAdcRecord6.Add(getCalibAdcDatas(2, 6, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 6)
-                                {
-                                    showAdcRecord7.Add(getCalibAdcDatas(2, 7, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                                else if (adcEnableChState[(chIdx) % adcEnableChNum] == 7)
-                                {
-                                    showAdcRecord8.Add(getCalibAdcDatas(2, 8, SWAPS16(_prxData.adcData[i * adcEnableChNum + chIdx])));
-                                }
-                            }
-                        }
-
                         //生成X轴数组
-                        for (UInt16 i = 0; i < SWAP16(_prxData.dataLen); i++) { xAxisIndex.Add(i / Convert.ToDouble(setAdcSamplingRate.Text)); }
-                        UInt16 axisMaxLen = (UInt16)(SWAP16(_prxData.dataLen) / adcEnableChNum);
-
-
+                        for (UInt16 i = 0; i < onlineRecordMaxLen; i++) { xAxisIndex.Add(i / (Convert.ToDouble(setAdcSamplingRate.Text) / 1000)); }
                         if (progressBar.Value > 0)
                         {
                             progressBar.Value = 0;
@@ -871,21 +821,20 @@ namespace zlTool
                         }
 
                         onlineRecordRefreshFlag = true;
-
+                        
                         if (autoSave.Checked == true && filePath.Text != "N/A" && filePath.Text != "")
                         {
                             StringBuilder str = new StringBuilder();
-                            for (int i = 0; i < axisMaxLen; i++)
+                            for (int i = 0; i < onlineRecordMaxLen; i++)
                             {
-                                if (adcRecord1.Count > i) { str.Append(adcRecord1[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord2.Count > i) { str.Append(adcRecord2[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord3.Count > i) { str.Append(adcRecord3[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord4.Count > i) { str.Append(adcRecord4[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord5.Count > i) { str.Append(adcRecord5[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord6.Count > i) { str.Append(adcRecord6[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord7.Count > i) { str.Append(adcRecord7[i].ToString("0.####") + ","); } else { str.Append(","); }
-                                if (adcRecord8.Count > i) { str.Append(adcRecord8[i].ToString("0.####") + ","); } else { str.Append(","); }
-
+                                if (adcRecord1.Count > i) { str.Append(adcRecord1[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord2.Count > i) { str.Append(adcRecord2[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord3.Count > i) { str.Append(adcRecord3[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord4.Count > i) { str.Append(adcRecord4[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord5.Count > i) { str.Append(adcRecord5[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord6.Count > i) { str.Append(adcRecord6[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord7.Count > i) { str.Append(adcRecord7[i].ToString("0.0000") + ","); } else { str.Append(","); }
+                                if (adcRecord8.Count > i) { str.Append(adcRecord8[i].ToString("0.0000") + ","); } else { str.Append(","); }
                                 str.Append("\r\n");
                             }
 
@@ -896,7 +845,6 @@ namespace zlTool
 
                         }
 
-
                     }
 
                 }
@@ -905,91 +853,32 @@ namespace zlTool
             }));
         }
 
-
+        UInt16 onlineRecordMaxLen = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (ckb_RefreshWave.Checked && onlineRecordRefreshFlag)
             {
+
                 waveform.Plot.Clear();
-
-                // 颜色配置（对应 1~8 路）
-                var colors = new[]
+                //将曲线分别加入到相应的list 
+                for (UInt16 i = 0; i < adcEnableChNum; i++)
                 {
-                    ScottPlot.Colors.Brown,
-                    ScottPlot.Colors.Red,
-                    ScottPlot.Colors.Magenta,
-                    ScottPlot.Colors.Orange,
-                    ScottPlot.Colors.Green,
-                    ScottPlot.Colors.DarkCyan,
-                    ScottPlot.Colors.Blue,
-                    ScottPlot.Colors.Purple
-                };
-
-                // 通道打包
-                var channels = new[]
-                {
-                    (Check: adcCheck1, Data: showAdcRecord1),
-                    (Check: adcCheck2, Data: showAdcRecord2),
-                    (Check: adcCheck3, Data: showAdcRecord3),
-                    (Check: adcCheck4, Data: showAdcRecord4),
-                    (Check: adcCheck5, Data: showAdcRecord5),
-                    (Check: adcCheck6, Data: showAdcRecord6),
-                    (Check: adcCheck7, Data: showAdcRecord7),
-                    (Check: adcCheck8, Data: showAdcRecord8)
-                };
-
-                // 第一步：计算所有勾选通道的长度，未勾选 = 极大值（不影响最小值）
-                int[] recordLenList = new int[8];
-                for (int i = 0; i < 8; i++)
-                {
-                    recordLenList[i] = channels[i].Check.Checked
-                        ? channels[i].Data.Count
-                        : 9999999;
-                }
-                // 第二步：先限制每个通道最大长度为 1000，再计算最短长度
-                for (int i = 0; i < 8; i++)
-                {
-                    // 如果通道数据长度 >1000，只保留前 1000 个
-                    if (channels[i].Data.Count > 1000)
-                    {
-                        channels[i].Data.RemoveRange(0, channels[i].Data.Count - 1000);
-                    }
+                    if ((adcEnableChState[i % adcEnableChNum]) == 0) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord1, ScottPlot.Colors.Brown); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 1) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord2, ScottPlot.Colors.Red); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 2) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord3, ScottPlot.Colors.Magenta); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 3) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord4, ScottPlot.Colors.Orange); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 4) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord5, ScottPlot.Colors.Green); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 5) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord6, ScottPlot.Colors.DarkCyan); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 6) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord7, ScottPlot.Colors.Blue); }
+                    else if ((adcEnableChState[i % adcEnableChNum]) == 7) { waveform.Plot.Add.ScatterLine(xAxisIndex, adcRecord8, ScottPlot.Colors.Purple); }
                 }
 
-                // 重新计算长度（已经被限制在 1000 以内）
-                for (int i = 0; i < 8; i++)
-                {
-                    recordLenList[i] = channels[i].Check.Checked ? channels[i].Data.Count : 9999999;
-                }
-
-                // 获取最短长度（对齐基准）
-                int recordMinLen = recordLenList.Min();
-
-                // 第三步：生成 X 轴
-                xAxisIndex.Clear();
-                for (int i = 0; i < recordMinLen; i++)
-                {
-                    xAxisIndex.Add(i / 1000.0);
-                }
-                double[] xAxis = xAxisIndex.ToArray();
-
-                // 第四步：绘制曲线（已经天然长度合规）
-                for (int i = 0; i < 8; i++)
-                {
-                    var (check, data) = channels[i];
-                    if (check.Checked)
-                    {
-                        var alignedData = data.Take(recordMinLen).ToArray();
-                        waveform.Plot.Add.ScatterLine(xAxis, alignedData, colors[i]);
-                    }
-                }
-
-                // 坐标轴
-                waveform.Plot.Axes.SetLimits(0, recordMinLen / 1000.0, wave_GetLimitsMin(), wave_GetLimitsMax());
-
+                waveform.Plot.Axes.SetLimits(0, Convert.ToDouble(onlineRecordMaxLen) / (Convert.ToDouble(setAdcSamplingRate.Text) / 1000), wave_GetLimitsMin(), wave_GetLimitsMax());
                 waveform.Show();
                 waveform.Refresh();
+                
             }
+
             onlineRecordRefreshFlag = false;
             if (string.IsNullOrEmpty(setAdcSamplingRate.Text)) return;
             if (adcCalibParams.calibMode == true)

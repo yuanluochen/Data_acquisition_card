@@ -151,7 +151,7 @@ namespace zlTool
             public byte cmdId;
             public UInt16 frameLen;
             public UInt16 dataLen;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1000)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10000)]
             public UInt16[] ddsDatas;
             public UInt16 crc;
         }

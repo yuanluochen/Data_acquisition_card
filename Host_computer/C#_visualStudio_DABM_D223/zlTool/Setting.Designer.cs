@@ -2129,7 +2129,7 @@
             upperVersion.Name = "upperVersion";
             upperVersion.Size = new Size(79, 16);
             upperVersion.TabIndex = 641;
-            upperVersion.Text = "00300001";
+            upperVersion.Text = "00300002";
             // 
             // label18
             // 

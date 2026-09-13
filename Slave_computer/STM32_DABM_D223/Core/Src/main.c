@@ -91,6 +91,7 @@ static void MX_TIM8_Init(void);
 //uint8_t QSPI_ReadStatusRegister(QSPI_HandleTypeDef *hqspi);
 char init_success = 0;
 
+// 定时器中断处理函数，集中处理
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(!init_success){return;}
@@ -127,12 +128,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if(htim == &htim13)
 	{
+    // ADC 处理部分
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_6,1);
 		qspiAdcTimTask();
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_6,0);
 	}
 	else if(htim == &htim14)
 	{
+    // DAC 处理部分
 		ddsDac_tim_task();
 	}
 }
@@ -189,52 +192,43 @@ int main(void)
 	HAL_GPIO_WritePin(USB_RST_GPIO_Port,USB_RST_Pin,1);
 	HAL_GPIO_WritePin(FPGA_SPI_CS_GPIO_Port,FPGA_SPI_CS_Pin,1);
 
-		rt_thread_delay(100);
-		HAL_GPIO_WritePin(USB_RST_GPIO_Port,USB_RST_Pin,0);
-		HAL_GPIO_WritePin(AD_RESET_GPIO_Port,AD_RESET_Pin,0);
-		nvm_data_init();
+	rt_thread_delay(100);
+	HAL_GPIO_WritePin(USB_RST_GPIO_Port,USB_RST_Pin,0);
+	HAL_GPIO_WritePin(AD_RESET_GPIO_Port,AD_RESET_Pin,0);
+	nvm_data_init();
 
-		rt_thread_delay(200);
-		_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
-		rtos_spi_write();
-		rt_thread_delay(200);
-//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_initSram;
-//		rtos_spi_write();
-//		rt_thread_delay(10);
-//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
-//		rtos_spi_write();
-//		rt_thread_delay(200);
-//		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_stop;
-//		rt_thread_delay(10);
-		HAL_TIM_Base_Start_IT(&htim1);
-		HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);  
-		
-		HAL_TIM_Base_Start_IT(&htim2);
-		HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);  
-		
-		HAL_TIM_Base_Start_IT(&htim3);
-		HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);  
-		
-		HAL_TIM_Base_Start_IT(&htim4);
-		HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);  
-		
-		HAL_TIM_Base_Start_IT(&htim5);
-		HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_3);  
-		
-		HAL_TIM_Base_Start_IT(&htim8);
-		HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);  
-		
-		HAL_TIM_Base_Start_IT(&htim12);		
-		HAL_TIM_Base_Start_IT(&htim13);
-		HAL_TIM_Base_Start_IT(&htim14);
-		
+	rt_thread_delay(200);
+	_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
+	rtos_spi_write();
+  rt_thread_delay(200);
 
-		
-		rt_msgProcess_init();
-		rt_adcFunc_init();
-		rt_thread_delay(100);
-				
-		init_success = 1;
+  HAL_TIM_Base_Start_IT(&htim1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+
+  HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+
+  HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
+
+  HAL_TIM_Base_Start_IT(&htim5);
+  HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_3);
+
+  HAL_TIM_Base_Start_IT(&htim8);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
+
+  HAL_TIM_Base_Start_IT(&htim12);//系统 时基
+  HAL_TIM_Base_Start_IT(&htim13);//ADC 时基
+  HAL_TIM_Base_Start_IT(&htim14);//DAC 时基
+
+  rt_msgProcess_init();
+  rt_adcFunc_init();
+  rt_thread_delay(100);
+
+  init_success = 1;
 
   /* USER CODE END 2 */
 

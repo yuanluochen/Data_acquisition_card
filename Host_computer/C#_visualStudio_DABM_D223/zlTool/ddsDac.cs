@@ -822,6 +822,10 @@ namespace zlTool
 
         }
 
+
+        List<UInt16> xDdsWaveIndex = new List<UInt16>();
+        List<double> ddsWave = new List<double>();
+
         private void button6_Click(object sender, EventArgs e)
         {
             string[] loadText = new string[200000];
@@ -854,7 +858,7 @@ namespace zlTool
                     string line;
                     // 从文件读取并显示行，直到文件的末尾 
                     //只读取1000行, 超过1000行的部分忽略, 不足的话按照实际长度读取
-                    for (Int32 i = 0; i < 1000; i++)
+                    for (Int32 i = 0; i < 10000; i++)
                     {
                         if ((line = sr.ReadLine()) != null)
                         {
@@ -897,16 +901,19 @@ namespace zlTool
                     AryBuf = loadText[i].Split(',');
 
                     if (string.IsNullOrEmpty(AryBuf[0])) return;
-                    _pTx.ddsDatas[i] = SWAP16((Convert.ToUInt16(AryBuf[0])));
+                    UInt16 localDacData = Convert.ToUInt16(AryBuf[0]);
+
+                    _pTx.ddsDatas[i] = SWAP16(localDacData);
+
                     xDdsWaveIndex.Add(i);
-                    ddsWave.Add(_pTx.ddsDatas[i] * 5.0 / 1000);
+                    ddsWave.Add(localDacData * 5.0 / 65536);
 
                 }
             }
             catch { }
             waveform.Plot.Clear();
             waveform.Plot.Add.ScatterLine(xDdsWaveIndex, ddsWave, ScottPlot.Colors.Red);
-            waveform.Plot.Axes.SetLimits(0, maxLen, -10, ddsWave.Max() + 10);
+            waveform.Plot.Axes.SetLimits(0, maxLen, -0.1, 5.1);
             waveform.Show();
             waveform.Refresh();
 
@@ -918,8 +925,7 @@ namespace zlTool
             _ddsDacSendData(txbuf);
         }
 
-        List<UInt16> xDdsWaveIndex = new List<UInt16>();
-        List<double> ddsWave = new List<double>();
+    
 
         private void button5_Click(object sender, EventArgs e)
         {

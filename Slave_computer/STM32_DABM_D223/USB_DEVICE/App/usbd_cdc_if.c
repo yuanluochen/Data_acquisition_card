@@ -269,7 +269,7 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 		if((*Len + _usbMsg.usbRxIndex) < USB_RX_BUF_LEN)
 	{
 		memcpy(_usbMsg.usbRxBuf+_usbMsg.usbRxIndex, Buf, *Len);
-		_usbMsg.usbRxIndex+=*Len;
+		_usbMsg.usbRxIndex += (*Len);
 	}
 	
 	_usbMsg.usbRxMsgProcessFlag = usbFlag_busy;

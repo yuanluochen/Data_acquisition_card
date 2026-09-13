@@ -178,14 +178,19 @@ namespace zlTool
                             adcCalibParams.sensorUnit[i] = _prxData.sensorUnit[i];
 
                         }
-                        sensorUnit1.SelectedIndex = _prxData.sensorUnit[0];
-                        sensorUnit2.SelectedIndex = _prxData.sensorUnit[1];
-                        sensorUnit3.SelectedIndex = _prxData.sensorUnit[2];
-                        sensorUnit4.SelectedIndex = _prxData.sensorUnit[3];
-                        sensorUnit5.SelectedIndex = _prxData.sensorUnit[4];
-                        sensorUnit6.SelectedIndex = _prxData.sensorUnit[5];
-                        sensorUnit7.SelectedIndex = _prxData.sensorUnit[6];
-                        sensorUnit8.SelectedIndex = _prxData.sensorUnit[7];
+                        try
+                        {
+                            sensorUnit1.SelectedIndex = _prxData.sensorUnit[0];
+                            sensorUnit2.SelectedIndex = _prxData.sensorUnit[1];
+                            sensorUnit3.SelectedIndex = _prxData.sensorUnit[2];
+                            sensorUnit4.SelectedIndex = _prxData.sensorUnit[3];
+                            sensorUnit5.SelectedIndex = _prxData.sensorUnit[4];
+                            sensorUnit6.SelectedIndex = _prxData.sensorUnit[5];
+                            sensorUnit7.SelectedIndex = _prxData.sensorUnit[6];
+                            sensorUnit8.SelectedIndex = _prxData.sensorUnit[7];
+                        }
+                        catch (Exception ex) { }
+
 
                         softVersion.Text =  SWAP32(_prxData.softVersion).ToString("X08");
                         if (upperVersion.Text == softVersion.Text)
