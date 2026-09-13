@@ -1,0 +1,27 @@
+# ---- Keil MDK per-user settings ----
+*.uvguix.*
+*.uvoptx
+
+# ---- Build output folder ----
+DABM-D223/
+
+# ---- Build artifacts ----
+*.o
+*.d
+*.crf
+*.dep
+*.axf
+*.hex
+*.bin
+*.elf
+*.map
+*.lnp
+*.sct
+*.iex
+*.htm
+*.build_log.htm
+
+# ---- IDE / tool logs ----
+.vscode/uv4.log
+.vscode/uv4.log.lock
+.vscode/keil-assistant.log
