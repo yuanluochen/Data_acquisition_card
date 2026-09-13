@@ -5,7 +5,7 @@
 
 #include "main.h"
 
-#pragma pack(1)
+
 HAL_StatusTypeDef QSPI_WriteDatas_DMA(u8 cmd,u8 dummyCycle,u8* pData, uint32_t WriteAddr, uint32_t Size);
 HAL_StatusTypeDef QSPI_ReadDatas_DMA(u8 cmd,u8 dummyCycle,u8* pData, uint32_t ReadAddr, uint32_t Size);
 HAL_StatusTypeDef QSPI_ReadDatas(u8 cmd,u8 dummyCycle,u8* pData, uint32_t ReadAddr, uint32_t Size);

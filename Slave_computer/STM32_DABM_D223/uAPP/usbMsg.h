@@ -2,11 +2,12 @@
 #define __USB_MSG_H_
 
 #include "main.h"
-#pragma pack(1)
+
 
 #define USB_TX_BUF_LEN			22000
 #define USB_RX_BUF_LEN			22000
 
+#pragma pack(1)
 typedef struct{
 	u16 usbRxFinishTick;
 	u8 usbRxMsgProcessFlag;
@@ -14,6 +15,7 @@ typedef struct{
 	u8 usbRxBuf[USB_RX_BUF_LEN];
 	u8 usbWorkFlag;
 }usbMsg;
+#pragma pack()
 
 extern usbMsg _usbMsg;
 

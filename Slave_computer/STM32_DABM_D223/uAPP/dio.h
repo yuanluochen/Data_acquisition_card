@@ -2,12 +2,12 @@
 #define __DIO_H_
 
 #include "main.h"
-#pragma pack(1)
+
 
 void dio_tim_task();
 void pwm_task_thread();
 
-
+#pragma pack(1)
 typedef struct{
 	u8 dinAll;
 	u8 doutAll;
@@ -28,6 +28,7 @@ typedef struct{
 	
 	u8 uploadFinshFlag;
 }dioWorkParam;
+#pragma pack()
 
 extern dioWorkParam _dioParam;
 

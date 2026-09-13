@@ -2,7 +2,7 @@
 #define __MSGSTRUCT_H_
 
 #include "main.h"
-#pragma pack(1)
+
 
 void fun_msgProcess_task(u8* data);
 extern u8 MSG_TX_BUF[30000];
@@ -82,13 +82,15 @@ _cmdId_getSoftVersion = 0xf0,
 
 
 };
-
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  //0xffff
 		u8 cmdId;      //命令
 		u16 frameLen;   //报文长度
 }msgHead;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 	 u16 msgHead;
 	 u8  cmdId;
@@ -97,7 +99,9 @@ typedef struct {
 	 u16 dacDatas[10000];
 	 u16 crc;
 }msgSetDacDatas;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 	u16 msgHead;  //0xffff
 	u8 cmdId;      //命令
@@ -114,13 +118,17 @@ typedef struct {
 	
 	u16 crc;
 }msgDdsDacParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 	u8 calibEnable;
 	int32 calibDigital;
 	int32 calibAnalog;
 }dacCalibDatas;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -130,7 +138,9 @@ typedef struct {
 		dacCalibDatas _dacCalibDatasPointB[4];
 		u16 crc;   
 }msgGetDacCalibParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 	u16 msgHead;  //0xffff
 	u8 cmdId;      //命令
@@ -151,10 +161,10 @@ typedef struct {
 
 	u16 crc;
 }msgAdcWaveState;
+#pragma pack()
 
 
-
-
+#pragma pack(1)
 typedef struct {
 	u16 msgHead;  //0xffff
 	u8 cmdId;      //命令
@@ -171,8 +181,9 @@ typedef struct {
 
 	u16 crc;
 }msgAdcStartSramRecord;
+#pragma pack()
 
-
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -180,7 +191,9 @@ typedef struct {
 		u8 ch;   
 		u16 crc;   
 }msgNoParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
      u16 msgHead;  
      u8 cmdId;      
@@ -189,7 +202,9 @@ typedef struct {
      u8 data;   
      u16 crc;   
 }msgUbyte;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -198,7 +213,9 @@ typedef struct {
 		u16 data;   
 		u16 crc;   
 }msgUWord;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -207,7 +224,9 @@ typedef struct {
 		u32 data;   
 		u16 crc;   
 }msgULong;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  //包头 0x55aa
 		u8 cmdId;     //返回指令
@@ -222,7 +241,9 @@ typedef struct {
 
 		u16 crc;   	//crc校验值
 }msgGetAdcValue;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -239,8 +260,9 @@ typedef struct {
 	
 		u16 crc;   
 }msgAutoUploadDatas;
+#pragma pack()
 
-
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -256,7 +278,9 @@ typedef struct {
 		u16 pwmAccUnit[6];	
 		u16 crc;   
 }msgGetDioAll;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -276,7 +300,9 @@ typedef struct {
 	
 		u16 crc;   
 }msgGetSettingParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -298,8 +324,9 @@ typedef struct {
 		s16 data8[1000];  
 		u16 crc;   
 }msgGetRecentConsecutiveDatas;
+#pragma pack()
 
-
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -313,7 +340,9 @@ typedef struct {
 	
 		u16 crc;   
 }msgPwmParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  
 		u8 cmdId;      
@@ -325,8 +354,9 @@ typedef struct {
 
 		u16 crc;   
 }msgSetIpAndPort;
+#pragma pack()
 
-
+#pragma pack(1)
 typedef struct {
 		u16 msgHead;  //包头 0x55aa
 		u8 cmdId;     //返回指令
@@ -339,7 +369,7 @@ typedef struct {
 
 		u16 crc;   	//crc校验值
 }msgGetCalibVolt;
-
+#pragma pack()
 #endif
 
 

@@ -2,13 +2,14 @@
 #define __REG_FPGA_H
 
 #include "main.h"
-#pragma pack(1)
+
 
 void irq_spi_read();
 void irq_spi_write();
 void rtos_spi_read();
 void rtos_spi_write();
 
+#pragma pack(1)
 typedef struct{
 u8 	RESERVE;//	0
 u8 	REG_A2F_SRAM_WORK_MODE;//	1
@@ -26,7 +27,9 @@ u8 	REG_A2F_FPGA_ADC_CH_ENABLE;//	9
 u8 	REG_A2F_FPGA_ADC_CH_ENABLE_TOTAL;//	10
 u8 	REG_A2F_FPGA_ADC_DIFF_ENABLE;//	11
 }regA2FMap;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 
 u8 	RESERVE;//	0
@@ -36,6 +39,7 @@ u8 	REG_F2A_DIN;//	3
 u8 	REG_A2F_SRAM_BUF_CNT;//	4
 
 }regF2AMap;
+#pragma pack()
 
 enum _fpgaWorkMode
 {
@@ -49,7 +53,7 @@ enum _fpgaWorkMode
 
 extern regA2FMap _regA2FMap;
 extern regF2AMap _regF2AMap;
-#pragma pack()
+
 #endif
 
 

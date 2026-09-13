@@ -1,11 +1,11 @@
 #ifndef _AD7606_H
 #define _AD7606_H
-#pragma pack(1)
+
 #include "main.h"
 
 void qspiAdcTimTask(void);
 void adc_dac_paramCalcThread(void);
-
+#pragma pack(1)
 typedef struct{
 
 	s16 getAdc[9];
@@ -29,20 +29,23 @@ typedef struct{
 	u8 adc_BufIndexGap;
 
 }__UADC;
+#pragma pack()
 
 extern __UADC _uadc;
 
+#pragma pack(1)
 typedef struct {
 	u16 data[8]; 
 	u8 din;
 }f2a_qspiAdc_FIFO_BufSturct;
+#pragma pack()
 
-
+#pragma pack(1)
 typedef struct {
 	f2a_qspiAdc_FIFO_BufSturct fifo[500]; 
 }f2a_qspiAdcBufSturct;
-
 #pragma pack()
+
 #endif
 
 

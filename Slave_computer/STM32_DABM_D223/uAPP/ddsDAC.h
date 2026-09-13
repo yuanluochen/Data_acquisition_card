@@ -2,11 +2,10 @@
 #define __DDSDAC_H_
 
 #include "main.h"
-#pragma pack(1)
+
 
 #define DA_CS(__X) 		HAL_GPIO_WritePin(DA_CS_GPIO_Port,DA_CS_Pin,__X);
 void ddsDac_tim_task();
-
 
 enum _ddsDacWorkMode
 {
@@ -21,7 +20,7 @@ enum _ddsDacWorkMode
 };
 
 
-
+#pragma pack(1)
 typedef struct{
   u32 dacIndex[4];   
   u32 dacMaxIndex[4];   
@@ -35,7 +34,7 @@ typedef struct{
 	u32 crc;
 	u8 ddsAllCloseFlag;
 }ddsDac;
-
+#pragma pack()
 extern ddsDac _ddsDac;
 
 #endif

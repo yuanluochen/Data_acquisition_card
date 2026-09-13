@@ -2,14 +2,14 @@
 #define _NVMDATA_H_
 
 #include "main.h"
-#pragma pack(1)
+
 
 void nvm_data_init(void);
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 ////////////////////////////////////////////
-
+#pragma pack(1)
 typedef struct{
 	u16 adc_ch_Enable;   
 	u8 adc_diff_Enable;   	
@@ -22,7 +22,9 @@ typedef struct{
 	u8 trig_Ch;
 	u8 back;
 }adcParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 	u16 freq;
 	u16 volt;
@@ -30,19 +32,25 @@ typedef struct{
 	u16 bias;
 	u16 phase;
 }ddsDacParam;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 	u16 pwmFreq;
 	u16 pwmDuty;
 	u16 pwmAccUnit;
 }pwmDatas;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 	u8 calibEnable;
 	int32 calibDigital;
 	int32 calibAnalog;
 }calibDatas;
+#pragma pack()
 
+#pragma pack(1)
 typedef struct{
 adcParam _adcParam;
 ddsDacParam _ddsDacParam[4];
@@ -61,7 +69,7 @@ u8 RecordDelay;
 u16 dacOutRate;
 u32 softVersion;
 }framDatas;
-
+#pragma pack()
 
 extern framDatas _framDatas;
 

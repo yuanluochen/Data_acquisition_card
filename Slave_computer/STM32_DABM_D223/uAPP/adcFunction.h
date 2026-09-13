@@ -2,7 +2,7 @@
 #define __ADCFUNCTION_H_
 
 #include "main.h"
-#pragma pack(1)
+
 void adcFunction_thread(void);
 void adcFunction_tim_task(void);
 
@@ -23,7 +23,7 @@ enum _deviceWorkMode
 
 #define ADC_WAVE_ONCE_LEN (10000)
 
-
+#pragma pack(1)
 typedef struct{
 	u32 global_tick_ms;
 		u8 deviceWorkMode;
@@ -61,9 +61,11 @@ typedef struct{
 		u8 sramBufCnt_his;
 		
 }adcFunctionParam;
+#pragma pack()
 
 extern adcFunctionParam _adcFunctionParam;
 
+#pragma pack(1)
 typedef struct{
   u16 msgHead; 
   u8 cmdId;      
@@ -82,7 +84,7 @@ typedef struct{
 	
 	u16 crc;
 }_adcSendBuf;
-
+#pragma pack()
 extern _adcSendBuf _adcBuf;
 extern _adcSendBuf _adcBufB;
 
