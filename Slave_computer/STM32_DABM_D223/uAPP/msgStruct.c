@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include "msgStruct.h"
 u8 MSG_TX_BUF[30000];
 
 void fun_getAdcParam()
