@@ -611,7 +611,7 @@ void fun_setAdcRange(u8* rxData)
 			return;
 		}
 		msgUbyte * _pRx = (msgUbyte*)rxData;
-
+    //解析数据
 		_framDatas._adcParam.adcRange = _pRx->data;
 
 		fram_write_datas();
@@ -624,7 +624,7 @@ void fun_setAdcSignalType(u8* rxData)
 		return;
 		}
 		msgUbyte * _pRx = (msgUbyte*)rxData;
-
+    //解析数据
 		_framDatas._adcParam.adcSignalType = _pRx->data;
 
 		fram_write_datas();

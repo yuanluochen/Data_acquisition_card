@@ -1,8 +1,0 @@
-K:\DABM\DABM-D223上位机直接运行版\zlTool.pdb
-K:\DABM\DABM-D223上位机直接运行版\D3DCompiler_47_cor3.dll
-K:\DABM\DABM-D223上位机直接运行版\PenImc_cor3.dll
-K:\DABM\DABM-D223上位机直接运行版\PresentationNative_cor3.dll
-K:\DABM\DABM-D223上位机直接运行版\vcruntime140_cor3.dll
-K:\DABM\DABM-D223上位机直接运行版\wpfgfx_cor3.dll
-K:\DABM\DABM-D223上位机直接运行版\libSkiaSharp.dll
-K:\DABM\DABM-D223上位机直接运行版\zlTool.exe

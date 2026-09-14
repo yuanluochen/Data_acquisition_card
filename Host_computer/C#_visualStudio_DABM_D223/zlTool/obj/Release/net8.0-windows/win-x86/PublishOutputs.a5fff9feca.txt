@@ -1,8 +1,0 @@
-D:\发布\zlTool.pdb
-D:\发布\D3DCompiler_47_cor3.dll
-D:\发布\PenImc_cor3.dll
-D:\发布\PresentationNative_cor3.dll
-D:\发布\vcruntime140_cor3.dll
-D:\发布\wpfgfx_cor3.dll
-D:\发布\libSkiaSharp.dll
-D:\发布\zlTool.exe

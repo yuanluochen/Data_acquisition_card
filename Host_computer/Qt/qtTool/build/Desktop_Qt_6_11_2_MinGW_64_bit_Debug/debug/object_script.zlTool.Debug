@@ -1,0 +1,17 @@
+debug/adcrecord.o
+debug/adcwave.o
+debug/crc.o
+debug/ddsdac.o
+debug/main.o
+debug/mainwindow.o
+debug/qcustomplot.o
+debug/zlos_netPort.o
+debug/zlos_uartPort.o
+debug/qrc_Resources.o
+debug/moc_adcrecord.o
+debug/moc_adcwave.o
+debug/moc_ddsdac.o
+debug/moc_mainwindow.o
+debug/moc_qcustomplot.o
+debug/moc_zlos_netPort.o
+debug/moc_zlos_uartPort.o

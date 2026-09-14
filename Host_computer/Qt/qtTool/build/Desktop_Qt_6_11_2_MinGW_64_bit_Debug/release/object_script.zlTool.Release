@@ -1,0 +1,17 @@
+release/adcrecord.o
+release/adcwave.o
+release/crc.o
+release/ddsdac.o
+release/main.o
+release/mainwindow.o
+release/qcustomplot.o
+release/zlos_netPort.o
+release/zlos_uartPort.o
+release/qrc_Resources.o
+release/moc_adcrecord.o
+release/moc_adcwave.o
+release/moc_ddsdac.o
+release/moc_mainwindow.o
+release/moc_qcustomplot.o
+release/moc_zlos_netPort.o
+release/moc_zlos_uartPort.o

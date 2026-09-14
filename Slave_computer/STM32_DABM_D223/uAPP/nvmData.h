@@ -7,8 +7,6 @@
 void nvm_data_init(void);
 
 ////////////////////////////////////////////
-////////////////////////////////////////////
-////////////////////////////////////////////
 #pragma pack(1)
 typedef struct{
 	u16 adc_ch_Enable;   
@@ -51,6 +49,7 @@ typedef struct{
 #pragma pack()
 
 #pragma pack(1)
+//FRAMÊý¾Ý
 typedef struct{
 adcParam _adcParam;
 ddsDacParam _ddsDacParam[4];
