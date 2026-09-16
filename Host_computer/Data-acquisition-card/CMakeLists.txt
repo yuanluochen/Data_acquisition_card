@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets SerialPort)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SerialPort)
-
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -23,8 +22,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Data-acquisition-card
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        comPort.h comPort.cpp
+        app/daqcardprocess.cpp app/daqcardprocess.h
+        app/comport.cpp app/comport.h
+        app/msgStruct.h
+
     )
+
+target_include_directories(Data-acquisition-card PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Data-acquisition-card APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

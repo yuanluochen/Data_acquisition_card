@@ -4,38 +4,39 @@
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "comPort.h"
+#include "app\comport.h"
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+  class MainWindow;
 }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow() override;
+  explicit MainWindow(QWidget *parent = nullptr);
+  ~MainWindow() override;
 
 private:
-    //按键状态
-    struct state{
-        bool PB_signal;
-        bool PB_serialport;
-    } state;
-    //串口
-    comPort *_comport;
+  // 按键状态
+  struct state
+  {
+    bool PB_signal;
+    bool PB_serialport;
+  } state;
+  // 串口
+  comPort *_comport;
 private slots:
-    void on_PB_signal_clicked();
+  void on_PB_signal_clicked();
 
-    void on_PB_serialport_search_clicked();
+  void on_PB_serialport_search_clicked();
 
-    void on_PB_serialport_clicked();
-
+  void on_PB_serialport_clicked();
 
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

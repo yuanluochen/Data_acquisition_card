@@ -356,8 +356,8 @@ void fun_msgStartOnlineRecord(u8* rxData)
 			}
 		}
 		_regA2FMap.REG_A2F_SRAM_WORK_MODE = _fpgaWorkMode_readFito;
-			//根据采样率计算max, fpga主频75M
-		_adcFunctionParam.adc_fpga_cycleMax = 75000000 / _framDatas._adcParam.samplingRate - 1;
+    // 根据采样率计算max, fpga主频75M
+    _adcFunctionParam.adc_fpga_cycleMax = 75000000 / _framDatas._adcParam.samplingRate - 1;
 		_regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX3 = _adcFunctionParam.adc_fpga_cycleMax>>16;
 		_regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX2 = _adcFunctionParam.adc_fpga_cycleMax>>8;
 		_regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX1 = _adcFunctionParam.adc_fpga_cycleMax>>0;
@@ -366,8 +366,8 @@ void fun_msgStartOnlineRecord(u8* rxData)
 		_regA2FMap.REG_A2F_FPGA_ADC_CH_ENABLE_TOTAL = _adcFunctionParam.adcChEnableMaxNum*2;
 		_regA2FMap.REG_A2F_FPGA_ADC_DIFF_ENABLE = _framDatas._adcParam.adc_diff_Enable;
 
-			rtos_spi_write();
-		//除以2再乘以2 是防止出现奇数地址
+    rtos_spi_write();
+    //除以2再乘以2 是防止出现奇数地址
 		_adcFunctionParam.recordOnce_MaxDataLen = (ADC_WAVE_ONCE_LEN / _adcFunctionParam.adcChEnableMaxNum) * _adcFunctionParam.adcChEnableMaxNum;
 		_adcFunctionParam.findFirstCh = 1;	//通知adc记录采集到的第一个数据通道号
 		_adcFunctionParam.deviceWorkMode = _deviceWorkMode_onlineRecord;
