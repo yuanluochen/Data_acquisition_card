@@ -22,15 +22,17 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Data-acquisition-card
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        app/daqcardprocess.cpp app/daqcardprocess.h
+        app/daqCardProcess.cpp app/daqCardProcess.h
         app/comport.cpp app/comport.h
         app/msgStruct.h
-        app/crc16.c app/crc16.h
+        app/crc16.cpp app/crc16.h
         app/struct_typedef.h
 
     )
-
+# add include path
 target_include_directories(Data-acquisition-card PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(Data-acquisition-card PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/app)
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Data-acquisition-card APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

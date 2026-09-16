@@ -41,7 +41,7 @@ void comPort::serial_receive(){
   //接收到数据
   QByteArray buf = this->_serialport->readAll();
   qDebug() << "serial port " << this->_name << "receive data : " << buf; 
-  //数据分发
+  //数据处理
+  this->_daqCardProcess.dataDecode((uint8_t *)buf.data());
   
-
 }

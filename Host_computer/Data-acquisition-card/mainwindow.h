@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "app\comport.h"
+#include "comPort.h"
+#include <QVector>
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -35,6 +36,8 @@ private slots:
   void on_PB_serialport_search_clicked();
 
   void on_PB_serialport_clicked();
+
+  void DACReadRTdata(QVector<int32_t> rtdata){};
 
 private:
   Ui::MainWindow *ui;

@@ -4,16 +4,18 @@
 #include <QSerialPort>
 #include <QObject>
 #include <QThread>
+#include "daqCardProcess.h"
+#include "struct_typedef.h"
 QT_BEGIN_NAMESPACE
-class comPort : QObject
+class comPort : public QObject
 {
   Q_OBJECT
 public:
-  comPort(QString name) : _name(name)
-  {
+  comPort(QString name) : _name(name){
     // 实例化串口对象
     this->_serialport = new QSerialPort();
   }
+  comPort(){};     
   // 析构函数
   ~comPort()
   {
@@ -32,12 +34,24 @@ public:
   {
     return this->_serialport->isOpen();
   }
+  //设置串口名
+  void setName(QString name){
+    this->_name = name;
+  }
   // 开启串口
   bool open();
+  //关闭串口
+  void close(){
+    this->_serialport->close();
+    qDebug() << "close serial port successful";
+  }
 
 public:
   // 串口对象
   QSerialPort *_serialport;
+  // 数据解码对象
+  daqCardProcess _daqCardProcess;
+  
 
 private:
   // 串口名

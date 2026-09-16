@@ -18,7 +18,10 @@ MainWindow::MainWindow(QWidget *parent)
   ui->PB_serialport->setText(QString("open serial port"));
 
   // 初始化指针
-  this->_comport = nullptr;
+  this->_comport = new comPort();
+  
+  //连接信号和槽
+  connect(&this->_comport->_daqCardProcess, SIGNAL(this->_comport->_daqCardProcess.dacRTVal), this, SLOT(this->DACReadRTdata));
 }
 
 MainWindow::~MainWindow()
@@ -69,13 +72,9 @@ void MainWindow::on_PB_serialport_clicked()
   {
     // 获取当前预开启串口名
     QString serialPortName = ui->CB_serialport->currentText();
-    // 实例化串口对象
-    if (this->_comport != nullptr)
-    {
-      // 释放对象
-      delete this->_comport;
-    }
-    this->_comport = new comPort(serialPortName);
+    //设置串口名
+    this->_comport->setName(serialPortName);
+    
     // 开启串口
     if (this->_comport->open())
     {
@@ -83,7 +82,6 @@ void MainWindow::on_PB_serialport_clicked()
       qDebug() << "serial port " << ui->CB_serialport->currentText() << " open";
       this->state.PB_serialport = true;
       ui->PB_serialport->setText(QString("close serial port"));
-
       return;
     }
   }
@@ -91,8 +89,7 @@ void MainWindow::on_PB_serialport_clicked()
   {
     // 关闭串口
     // 释放串口对象，析构函数内部自带关闭串口
-    delete this->_comport;
-    this->_comport = nullptr;
+    this->_comport->close();
     qDebug() << "serial port " << ui->CB_serialport->currentText() << " close";
     this->state.PB_serialport = false;
     ui->PB_serialport->setText(QString("open serial port"));
