@@ -25,6 +25,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         app/daqcardprocess.cpp app/daqcardprocess.h
         app/comport.cpp app/comport.h
         app/msgStruct.h
+        app/crc16.c app/crc16.h
+        app/struct_typedef.h
 
     )
 
