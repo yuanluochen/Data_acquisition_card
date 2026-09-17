@@ -42,30 +42,21 @@ public:
     this->_serialport->close();
     qDebug() << "close serial port successful";
   }
+  
   void startRecord(std::array<bool, 8> &adcCh, uint32_t sampleRate){
-    QVector<uint8_t> data = this->_daqCardProcess.adcRecordControlEncode(true, adcCh, sampleRate);
-    QByteArray txdata;
-    for (const auto e : data){
-      txdata.append(static_cast<char>(e));
-    }
+    QVector<uint8_t> txData = this->_daqCardProcess.adcRecordControlEncode(true, adcCh, sampleRate);
     int i = 0;
-    // for (auto e : data){
-    //   qDebug() << "data " << i++ << " :" << Qt::hex << Qt::showbase << e;
-    // }
-    for (auto e : txdata)
+    for (auto e : txData)
     {
       qDebug() << "data " << i++ << " :" << Qt::hex << Qt::showbase << static_cast<uint8_t>(e);
     }
-
-    this->_serialport->write(txdata);
+    //send
+    this->_serialport->write(reinterpret_cast<char*>(txData.data()), txData.size());
   }
   void stopRecord(){
-    QVector<uint8_t> data = this->_daqCardProcess.adcRecordControlEncode(false);
-    QByteArray txdata;
-    for (const auto e : data)
-    {
-      txdata.append(static_cast<char>(e));
-    }
+    QVector<uint8_t> txData = this->_daqCardProcess.adcRecordControlEncode(false);
+    //send
+    this->_serialport->write(reinterpret_cast<char*>(txData.data()), txData.size());
   }
 
 public:
