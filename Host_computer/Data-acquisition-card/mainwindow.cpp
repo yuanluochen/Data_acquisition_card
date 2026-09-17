@@ -12,12 +12,26 @@ MainWindow::MainWindow(QWidget *parent)
   // 按键关闭
   this->state.PB_signal = false;
   this->state.PB_serialport = false;
+  this->state.PB_adc = false;
   // 初始化信号输入和输出按键
   ui->PB_signal->setText(QString("open"));
   // 初始化串口按键
   ui->PB_serialport->setText(QString("open serial port"));
+  // 初始化adc采集按键
+  ui->PB_adc->setText(QString("open ADC"));
+  // 初始化ADC显示
 
-  // 初始化指针
+  ui->LB_ADC1_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC2_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC3_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC4_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC5_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC6_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC7_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC8_DIS->setText(QString::number(0, 'f', this->adcAccuracy) + " v");
+
+
+  // 初始化串口指针
   this->_comport = new comPort();
   
   //连接信号和槽
@@ -95,3 +109,44 @@ void MainWindow::on_PB_serialport_clicked()
     ui->PB_serialport->setText(QString("open serial port"));
   }
 }
+
+
+
+void MainWindow::DACReadRTdata(std::array<int32_t, 8> rtdata){
+  // 遍历读取
+  ui->LB_ADC1_DIS->setText(QString::number(rtdata[0], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC2_DIS->setText(QString::number(rtdata[1], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC3_DIS->setText(QString::number(rtdata[2], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC4_DIS->setText(QString::number(rtdata[3], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC5_DIS->setText(QString::number(rtdata[4], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC6_DIS->setText(QString::number(rtdata[5], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC7_DIS->setText(QString::number(rtdata[6], 'f', this->adcAccuracy) + " v");
+  ui->LB_ADC8_DIS->setText(QString::number(rtdata[7], 'f', this->adcAccuracy) + " v");
+}
+//adc 采集按键
+void MainWindow::on_PB_adc_clicked(){
+  if (this->state.PB_adc == false){
+    this->state.PB_adc = true;
+    ui->PB_adc->setText(QString("close ADC"));
+    
+    std::array<bool, 8> chEna;
+    //读取ADC使能情况
+    chEna[0] = ui->ChB_ADC1->isChecked();
+    chEna[1] = ui->ChB_ADC2->isChecked();
+    chEna[2] = ui->ChB_ADC3->isChecked();
+    chEna[3] = ui->ChB_ADC4->isChecked();
+    chEna[4] = ui->ChB_ADC5->isChecked();
+    chEna[5] = ui->ChB_ADC6->isChecked();
+    chEna[6] = ui->ChB_ADC7->isChecked();
+    chEna[7] = ui->ChB_ADC8->isChecked();
+
+    //采样率
+    int32_t sampleRate = 1000;
+    this->_comport->startRecord(chEna, sampleRate);
+  }
+  else{
+    this->state.PB_adc = false;
+    ui->PB_adc->setText(QString("open ADC"));
+  }
+}
+

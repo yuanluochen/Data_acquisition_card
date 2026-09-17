@@ -17,7 +17,7 @@
    <widget class="QLabel" name="LB_title">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>170</x>
       <y>0</y>
       <width>241</width>
       <height>51</height>
@@ -49,7 +49,7 @@
      <string>open</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -249,7 +249,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>41</x>
@@ -314,6 +314,393 @@
        </property>
        <property name="text">
         <string>open serial port</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>30</y>
+      <width>182</width>
+      <height>328</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="ChB_ADC1">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="LB_ADC1_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="ChB_ADC2">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="LB_ADC2_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="ChB_ADC3">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="LB_ADC3_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="ChB_ADC4">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="LB_ADC4_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" rowspan="2">
+        <widget class="QCheckBox" name="ChB_ADC5">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="LB_ADC5_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" rowspan="2">
+        <widget class="QLabel" name="LB_ADC6_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="ChB_ADC6">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC6</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QCheckBox" name="ChB_ADC7">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLabel" name="LB_ADC7_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>LB</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QCheckBox" name="ChB_ADC8">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ADC8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QLabel" name="LB_ADC8_DIS">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { border: 1px solid #242424; }</string>
+         </property>
+         <property name="text">
+          <string>LB</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="PB_adc">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>180</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>open ADC</string>
        </property>
       </widget>
      </item>

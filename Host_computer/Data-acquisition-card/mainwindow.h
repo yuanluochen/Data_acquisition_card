@@ -5,7 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include "comPort.h"
-#include <QVector>
+#include <array>
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -23,23 +23,27 @@ public:
 
 private:
   // 按键状态
-  struct state
-  {
+  struct state{
     bool PB_signal;
     bool PB_serialport;
+    bool PB_adc;
   } state;
   // 串口
   comPort *_comport;
-private slots:
+  //adc显示精度
+  int adcAccuracy = 3; 
+private slots : 
   void on_PB_signal_clicked();
 
   void on_PB_serialport_search_clicked();
 
   void on_PB_serialport_clicked();
 
-  void DACReadRTdata(QVector<int32_t> rtdata){};
+  void DACReadRTdata(std::array<int32_t, 8> rtdata);
 
-private:
+  void on_PB_adc_clicked();
+
+  private:
   Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

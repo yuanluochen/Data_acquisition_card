@@ -11,14 +11,12 @@ class comPort : public QObject
 {
   Q_OBJECT
 public:
-  comPort(QString name) : _name(name){
+  comPort(){
     // 实例化串口对象
     this->_serialport = new QSerialPort();
-  }
-  comPort(){};     
+  };     
   // 析构函数
-  ~comPort()
-  {
+  ~comPort(){
     // 关闭串口
     if (this->isopen())
     {
@@ -30,8 +28,7 @@ public:
     qDebug() << "comPort  has been released";
   }
   // 判断串口是否开启
-  bool isopen()
-  {
+  bool isopen(){
     return this->_serialport->isOpen();
   }
   //设置串口名
@@ -45,13 +42,37 @@ public:
     this->_serialport->close();
     qDebug() << "close serial port successful";
   }
+  void startRecord(std::array<bool, 8> &adcCh, uint32_t sampleRate){
+    QVector<uint8_t> data = this->_daqCardProcess.adcRecordControlEncode(true, adcCh, sampleRate);
+    QByteArray txdata;
+    for (const auto e : data){
+      txdata.append(static_cast<char>(e));
+    }
+    int i = 0;
+    // for (auto e : data){
+    //   qDebug() << "data " << i++ << " :" << Qt::hex << Qt::showbase << e;
+    // }
+    for (auto e : txdata)
+    {
+      qDebug() << "data " << i++ << " :" << Qt::hex << Qt::showbase << static_cast<uint8_t>(e);
+    }
+
+    this->_serialport->write(txdata);
+  }
+  void stopRecord(){
+    QVector<uint8_t> data = this->_daqCardProcess.adcRecordControlEncode(false);
+    QByteArray txdata;
+    for (const auto e : data)
+    {
+      txdata.append(static_cast<char>(e));
+    }
+  }
 
 public:
   // 串口对象
   QSerialPort *_serialport;
   // 数据解码对象
   daqCardProcess _daqCardProcess;
-  
 
 private:
   // 串口名

@@ -3,6 +3,7 @@
 
 #include "struct_typedef.h"
 
+
 enum __cmdId
 {
   /*       TO stm      */
@@ -142,6 +143,25 @@ typedef struct
 
   uint16_t crc;
 } msgAdcStartSramRecord;
+#pragma pack()
+
+#pragma pack(1)
+typedef struct
+{
+  uint16_t msgHead;  // 0xffff
+  uint8_t cmdId;     // 命令
+  uint16_t frameLen; // 报文长度
+
+  uint16_t adc_ch_Enable;
+  uint8_t adc_diff_Enable;
+
+  uint8_t adcSignalType; // 传感器类型
+  uint8_t adcRange;      // 传感器量程
+
+  uint32_t adcSamplingRate;     // 采样率
+
+  uint16_t crc;
+} msgAdcStartOnlineRecord;
 #pragma pack()
 
 #pragma pack(1)
@@ -352,5 +372,12 @@ typedef struct
   uint16_t crc; // crc校验值
 } msgGetCalibVolt;
 #pragma pack()
+
+#define SWAP16(c) ((((c) & 0xff00) >> 8) + (((c) & 0x00ff) << 8))
+
+#define SWAP32(c) ( (( (c) & 0xff000000UL ) >> 24)\
+    +( ( (c) & 0x00ff0000UL ) >> 8 )\
+    +( ( (c) & 0x0000ff00UL ) << 8 )\
+    +( ( (c) & 0x000000ffUL ) << 24 ))
 
 #endif
