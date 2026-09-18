@@ -48,7 +48,7 @@ typedef struct
 #pragma pack()
 
 #pragma pack(1)
-typedef struct
+typedef struct 
 {
   uint16_t msgHead;
   uint8_t cmdId;

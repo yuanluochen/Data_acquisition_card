@@ -101,7 +101,7 @@ void adcFunction_thread()
     _adcBuf.adcSignalType = _framDatas._adcParam.adcSignalType;
     _adcBuf.dataLen = SWAP16(_adcFunctionParam.recordOnce_MaxDataLen);
     // º∆À„crc
-    _adcBuf.crc = SWAP16(getCrc16WithTail((u8 *)&_adcBuf, SWAP16(_adcBuf.frameLen)));
+    _adcBuf.crc = SWAP16(getCrc16WithTail((u8 *)&_adcBuf, sizeof(_adcBuf)));
 
     usb_sendMsg((u8 *)&_adcBuf, SWAP16(_adcBuf.frameLen));
     _adcFunctionParam.adc_collectFullFlag = 0;
@@ -119,7 +119,7 @@ void adcFunction_thread()
     _adcBufB.adcSignalType = _framDatas._adcParam.adcSignalType;
     _adcBufB.dataLen = SWAP16(_adcFunctionParam.recordOnce_MaxDataLen);
     // º∆À„crc
-    _adcBufB.crc = SWAP16(getCrc16WithTail((u8 *)&_adcBufB, SWAP16(_adcBufB.frameLen)));
+    _adcBufB.crc = SWAP16(getCrc16WithTail((u8 *)&_adcBufB, sizeof(_adcBufB)));
 
     usb_sendMsg((u8 *)&_adcBufB, SWAP16(_adcBufB.frameLen));
     _adcFunctionParam.adc_collectFullFlag = 0;

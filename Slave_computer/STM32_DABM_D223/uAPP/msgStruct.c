@@ -868,32 +868,33 @@ void fun_getSettingParam()
 }
 
 //开始处理USB数据
-void fun_msgProcess_task(u8 *rxData)
-{
-  msgHead *_pRx = (msgHead *)rxData;
+void fun_msgProcess_task(u8 *rxData) {
+  msgHead rx = {};
+  memcpy(&rx, rxData, sizeof(msgHead));
+  // msgHead *_pRx = (msgHead *)rxData;
 
   //CRC校验
-  if (!checkCrc16WithTail((u8 *)rxData, SWAP16(_pRx->frameLen)))
+  if (!checkCrc16WithTail((u8 *)rxData, SWAP16(rx.frameLen)))
   {
     return;
   }
   //翻转电平
   HAL_GPIO_TogglePin(LED_USB_GPIO_Port, LED_USB_Pin);
   //判断数据包头
-  if (_pRx->msgHead != SWAP16(0x55aa))
+  if (rx.msgHead != SWAP16(0x55aa))
   {
     // 如果起始帧不为0x55aa, 则说明报文受污染, 丢弃
   }
   else
   {
     //判断数据包指令类型
-    switch (_pRx->cmdId)
+    switch (rx.cmdId)
     {
     // 设置adc采样范围
     case _cmdId_setAdcRange:
       fun_setAdcRange(rxData);
       break;
-
+  
     case _cmdId_setAdcSignalType:
       fun_setAdcSignalType(rxData);
       break;

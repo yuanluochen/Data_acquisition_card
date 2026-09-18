@@ -32,7 +32,7 @@ bool comPort::open()
     return false;
   }
   // 连接信号和槽
-  connect(this->_serialport, SIGNAL(readyRead()), this, SLOT(this->serial_receive()));
+  connect(this->_serialport, &QSerialPort::readyRead, this, &comPort::serial_receive);
   qDebug() << "open serial port " << this->_name << " is successful";
   return true;
 }
@@ -40,7 +40,7 @@ bool comPort::open()
 void comPort::serial_receive(){
   //接收到数据
   QByteArray buf = this->_serialport->readAll();
-  qDebug() << "serial port " << this->_name << "receive data : " << buf; 
+  qDebug() << "serial port " << this->_name << "receive data";; 
   //数据处理
   this->_daqCardProcess.dataDecode((uint8_t *)buf.data());
   

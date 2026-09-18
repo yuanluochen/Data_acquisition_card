@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
   this->_comport = new comPort();
   
   //连接信号和槽
-  connect(&this->_comport->_daqCardProcess, SIGNAL(this->_comport->_daqCardProcess.dacRTVal), this, SLOT(this->DACReadRTdata));
+  connect(&this->_comport->_daqCardProcess, &daqCardProcess::dacRTVal, this, &MainWindow::DACReadRTdata);
 }
 
 MainWindow::~MainWindow()
@@ -141,7 +141,7 @@ void MainWindow::on_PB_adc_clicked(){
     chEna[7] = ui->ChB_ADC8->isChecked();
 
     //采样率
-    int32_t sampleRate = 1000;
+    int32_t sampleRate = 5000;
     this->_comport->startRecord(chEna, sampleRate);
   }
   else{

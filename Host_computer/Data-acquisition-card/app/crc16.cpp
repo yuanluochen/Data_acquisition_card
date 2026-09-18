@@ -57,14 +57,6 @@ const uint8_t tableL[256] = {
     0x44, 0x84, 0x85, 0x45, 0x87, 0x47, 0x46, 0x86, 0x82, 0x42,
     0x43, 0x83, 0x41, 0x81, 0x80, 0x40};
 
-// uint16_t setCrc16(unsigned char *puchMsg, unsigned short usDataLen)
-//{
-//	uint16_t crc = getCrc16(puchMsg, usDataLen);
-//	puchMsg[usDataLen] = (crc >> 8) & 0xFF;
-//	puchMsg[usDataLen+1] = crc & 0xFF;
-//	return usDataLen+2;
-//
-// }
 
 // usDataLen 包含crc长度, 移除CRC尾部2字节后计算CRC
 uint16_t getCrc16WithTail(unsigned char *puchMsg, unsigned short usDataLen)

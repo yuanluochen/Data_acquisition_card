@@ -6,12 +6,13 @@ void daqCardProcess::dataDecode(const uint8_t *buf)
   const msgHead *_pRx = reinterpret_cast<const msgHead *>(buf);
 
   // CRC校验
-  if (!checkCrc16WithTail((uint8_t *)buf, _pRx->frameLen))
+  uint16_t len = _pRx->frameLen;
+  if (!checkCrc16WithTail((uint8_t *)buf, len))
   {
     return;
   }
   // 判断数据包头
-  if (_pRx->msgHead != 0x55aa)
+  if (_pRx->msgHead != SWAP16(0x55aa))
   {
     return;
   }
@@ -40,23 +41,24 @@ void daqCardProcess::decodeOnlineRecordDatas(const uint8_t *buf)
 {
   // 解码
   const msgGetAdcValue *_pD = reinterpret_cast<const msgGetAdcValue *>(buf);
-  //输出信息
+  // 输出信息
   std::array<int32_t, 8> rx;
-  //遍历幅值
-  for (int i = 0 ; i < rx.size(); i++){
-    rx[i] = _pD->data[i];
+  // 遍历幅值
+  for (int i = 0; i < rx.size(); i++)
+  {
+    rx[i] = SWAP32(_pD->data[i]);
   }
-  //输出
+  // 输出
   emit this->dacRTVal(rx);
 }
 
-QVector<uint8_t> daqCardProcess::adcRecordControlEncode(bool state , const std::array<bool, 8> & adcCh, uint32_t sampleRate)
+QVector<uint8_t> daqCardProcess::adcRecordControlEncode(bool state, const std::array<bool, 8> &adcCh, uint32_t sampleRate)
 {
   msgAdcStartOnlineRecord msg;
-  //赋值
+  // 赋值
   msg.msgHead = SWAP16(0x55aa);
   msg.frameLen = SWAP16(sizeof(msgAdcStartOnlineRecord));
-  //开启采集
+  // 开启采集
   if (state)
   {
     msg.cmdId = _cmdId_startOnlineRecord;
@@ -74,9 +76,9 @@ QVector<uint8_t> daqCardProcess::adcRecordControlEncode(bool state , const std::
     msg.adc_diff_Enable = 0;
 
     // 信号类型
-    msg.adcSignalType = 1;
+    msg.adcSignalType = 0;
     // 采样范围
-    msg.adcRange = 1;
+    msg.adcRange = 0;
 
     // 采样率
     if (sampleRate > max_sampRate)
@@ -90,18 +92,20 @@ QVector<uint8_t> daqCardProcess::adcRecordControlEncode(bool state , const std::
     }
     msg.adcSamplingRate = SWAP32(sampleRate);
   }
-  else{
-    //关闭采集
+  else
+  {
+    // 关闭采集
     msg.cmdId = _cmdId_stopOnlineRecord;
   }
 
-  //CRC
-  msg.crc = SWAP16(getCrc16WithTail((unsigned char *)(&msg), msg.frameLen));
+  // CRC
+  msg.crc = SWAP16(getCrc16WithTail(reinterpret_cast<uint8_t *>(&msg), SWAP16(msg.frameLen)));
 
   QVector<uint8_t> data;
-  //拆数据
-  uint8_t *pM = reinterpret_cast<uint8_t *> (&msg);
-  for (int i = 0; i < sizeof(msg); i++){
+  // 拆数据
+  uint8_t *pM = reinterpret_cast<uint8_t *>(&msg);
+  for (int i = 0; i < sizeof(msg); i++)
+  {
     data.push_back(pM[i]);
   }
   return data;
