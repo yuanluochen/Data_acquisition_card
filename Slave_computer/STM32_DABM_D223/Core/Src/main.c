@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2026 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -88,68 +88,71 @@ static void MX_TIM8_Init(void);
 /* USER CODE BEGIN 0 */
 
 // 假设我们已经有了这个函数来获取 Flash 的状态寄存器，以判断写入是否完成
-//uint8_t QSPI_ReadStatusRegister(QSPI_HandleTypeDef *hqspi);
+// uint8_t QSPI_ReadStatusRegister(QSPI_HandleTypeDef *hqspi);
 char init_success = 0;
 
 // 定时器中断处理函数，集中处理
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(!init_success){return;}
-	
-	if(htim == &htim1)
-	{
-		TIM1_task();
-	}
-	else if(htim == &htim2)
-	{
-		TIM2_task();
-	}
-	else if(htim == &htim3)
-	{
-		TIM3_task();
-	}
-	else if(htim == &htim4)
-	{
-		TIM4_task();
-	}
-	else if(htim == &htim5)
-	{
-		TIM5_task();
-	}
-	else if(htim == &htim8)
-	{
-		TIM8_task();
-	}
-	else if(htim == &htim12)
-	{
-		usbMsg_timer_task();
-		dio_tim_task();
-		adcFunction_tim_task();
-	}
-	else if(htim == &htim13)
-	{
+  if (!init_success)
+  {
+    return;
+  }
+
+  if (htim == &htim1)
+  {
+    TIM1_task();
+  }
+  else if (htim == &htim2)
+  {
+    TIM2_task();
+  }
+  else if (htim == &htim3)
+  {
+    TIM3_task();
+  }
+  else if (htim == &htim4)
+  {
+    TIM4_task();
+  }
+  else if (htim == &htim5)
+  {
+    TIM5_task();
+  }
+  else if (htim == &htim8)
+  {
+    TIM8_task();
+  }
+  else if (htim == &htim12)
+  {
+    usbMsg_timer_task();
+    dio_tim_task();
+    adcFunction_tim_task();
+  }
+  else if (htim == &htim13)
+  {
     // ADC 处理部分
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_6,1);
-		qspiAdcTimTask();
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_6,0);
-	}
-	else if(htim == &htim14)
-	{
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, 1);
+    qspiAdcTimTask();
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, 0);
+  }
+  else if (htim == &htim14)
+  {
     // DAC 处理部分
-		ddsDac_tim_task();
-	}
+    ddsDac_tim_task();
+  }
 }
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	rt_thread_delay(100);
+  rt_thread_delay(100);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -186,21 +189,33 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
-	HAL_GPIO_WritePin(AD_RESET_GPIO_Port,AD_RESET_Pin,1);
-	HAL_GPIO_WritePin(FRAM_CS_GPIO_Port,FRAM_CS_Pin,1);
-	HAL_GPIO_WritePin(AD_OS_GPIO_Port,AD_OS_Pin,0);
-	HAL_GPIO_WritePin(USB_RST_GPIO_Port,USB_RST_Pin,1);
-	HAL_GPIO_WritePin(FPGA_SPI_CS_GPIO_Port,FPGA_SPI_CS_Pin,1);
+  HAL_GPIO_WritePin(AD_RESET_GPIO_Port, AD_RESET_Pin, 1);
+  HAL_GPIO_WritePin(FRAM_CS_GPIO_Port, FRAM_CS_Pin, 1);
+  HAL_GPIO_WritePin(AD_OS_GPIO_Port, AD_OS_Pin, 0);
+  HAL_GPIO_WritePin(USB_RST_GPIO_Port, USB_RST_Pin, 1);
+  HAL_GPIO_WritePin(FPGA_SPI_CS_GPIO_Port, FPGA_SPI_CS_Pin, 1);
 
-	rt_thread_delay(100);
-	HAL_GPIO_WritePin(USB_RST_GPIO_Port,USB_RST_Pin,0);
-	HAL_GPIO_WritePin(AD_RESET_GPIO_Port,AD_RESET_Pin,0);
-	nvm_data_init();
+  rt_thread_delay(100);
+  HAL_GPIO_WritePin(USB_RST_GPIO_Port, USB_RST_Pin, 0);
+  HAL_GPIO_WritePin(AD_RESET_GPIO_Port, AD_RESET_Pin, 0);
+  nvm_data_init();
 
-	rt_thread_delay(200);
-	_regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
-	rtos_spi_write();
   rt_thread_delay(200);
+  _regA2FMap.REG_A2F_SRAM_WORK_MODE = 0x5a;
+  rtos_spi_write();
+  rt_thread_delay(200);
+
+  // 配置 FPGA 进入 FIFO 实时读取模式: STM32 连续读取 8 路 ADC
+  // 采样周期 = 75MHz / 100kHz - 1 = 749, 拆成 24 位寄存器的低/中/高字节
+  _regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX3 = (u8)((75000000 / 100000 - 1) >> 16);
+  _regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX2 = (u8)((75000000 / 100000 - 1) >> 8);
+  _regA2FMap.REG_A2F_FPGA_ADC_SAMPLE_CYCLE_MAX1 = (u8)((75000000 / 100000 - 1) >> 0);
+  _regA2FMap.REG_A2F_FPGA_ADC_CH_ENABLE = 0xff;
+  _regA2FMap.REG_A2F_FPGA_ADC_CH_ENABLE_TOTAL = 16;
+  _regA2FMap.REG_A2F_FPGA_ADC_DIFF_ENABLE = 0;
+  _regA2FMap.REG_A2F_SRAM_WORK_MODE = 3; // MODE_STM32_READ_FIFO
+  rtos_spi_write();
+  rt_thread_delay(50);
 
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
@@ -220,9 +235,9 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim8);
   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
 
-  HAL_TIM_Base_Start_IT(&htim12);//系统 时基
-  HAL_TIM_Base_Start_IT(&htim13);//ADC 时基
-  HAL_TIM_Base_Start_IT(&htim14);//DAC 时基
+  HAL_TIM_Base_Start_IT(&htim12); // 系统 时基
+  HAL_TIM_Base_Start_IT(&htim13); // ADC 时基
+  HAL_TIM_Base_Start_IT(&htim14); // DAC 时基
 
   rt_msgProcess_init();
   rt_adcFunc_init();
@@ -236,9 +251,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		adc_dac_paramCalcThread();
-		//fpga_read_register();
-		rt_thread_delay(10);
+    adc_dac_paramCalcThread();
+    // fpga_read_register();
+    rt_thread_delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -247,27 +262,29 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Supply configuration update enable
-  */
+   */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
 
-  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY))
+  {
+  }
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -286,10 +303,8 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
-                              |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2 | RCC_CLOCKTYPE_D3PCLK1 | RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
@@ -305,10 +320,10 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief QUADSPI Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief QUADSPI Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_QUADSPI_Init(void)
 {
 
@@ -336,14 +351,13 @@ static void MX_QUADSPI_Init(void)
   /* USER CODE BEGIN QUADSPI_Init 2 */
 
   /* USER CODE END QUADSPI_Init 2 */
-
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_SPI1_Init(void)
 {
 
@@ -384,14 +398,13 @@ static void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
 
   /* USER CODE END SPI1_Init 2 */
-
 }
 
 /**
-  * @brief SPI2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_SPI2_Init(void)
 {
 
@@ -432,14 +445,13 @@ static void MX_SPI2_Init(void)
   /* USER CODE BEGIN SPI2_Init 2 */
 
   /* USER CODE END SPI2_Init 2 */
-
 }
 
 /**
-  * @brief SPI3 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_SPI3_Init(void)
 {
 
@@ -480,14 +492,13 @@ static void MX_SPI3_Init(void)
   /* USER CODE BEGIN SPI3_Init 2 */
 
   /* USER CODE END SPI3_Init 2 */
-
 }
 
 /**
-  * @brief TIM1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM1_Init(void)
 {
 
@@ -550,14 +561,13 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 2 */
   HAL_TIM_MspPostInit(&htim1);
-
 }
 
 /**
-  * @brief TIM2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM2_Init(void)
 {
 
@@ -599,14 +609,13 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 2 */
   HAL_TIM_MspPostInit(&htim2);
-
 }
 
 /**
-  * @brief TIM3 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM3_Init(void)
 {
 
@@ -648,14 +657,13 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 2 */
   HAL_TIM_MspPostInit(&htim3);
-
 }
 
 /**
-  * @brief TIM4 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM4 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM4_Init(void)
 {
 
@@ -697,14 +705,13 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 2 */
   HAL_TIM_MspPostInit(&htim4);
-
 }
 
 /**
-  * @brief TIM5 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM5 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM5_Init(void)
 {
 
@@ -746,14 +753,13 @@ static void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 2 */
   HAL_TIM_MspPostInit(&htim5);
-
 }
 
 /**
-  * @brief TIM8 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM8 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM8_Init(void)
 {
 
@@ -815,14 +821,13 @@ static void MX_TIM8_Init(void)
 
   /* USER CODE END TIM8_Init 2 */
   HAL_TIM_MspPostInit(&htim8);
-
 }
 
 /**
-  * @brief TIM12 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM12 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM12_Init(void)
 {
 
@@ -863,14 +868,13 @@ static void MX_TIM12_Init(void)
   /* USER CODE BEGIN TIM12_Init 2 */
 
   /* USER CODE END TIM12_Init 2 */
-
 }
 
 /**
-  * @brief TIM13 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM13 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM13_Init(void)
 {
 
@@ -894,14 +898,13 @@ static void MX_TIM13_Init(void)
   /* USER CODE BEGIN TIM13_Init 2 */
 
   /* USER CODE END TIM13_Init 2 */
-
 }
 
 /**
-  * @brief TIM14 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM14 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM14_Init(void)
 {
 
@@ -925,12 +928,11 @@ static void MX_TIM14_Init(void)
   /* USER CODE BEGIN TIM14_Init 2 */
 
   /* USER CODE END TIM14_Init 2 */
-
 }
 
 /**
-  * Enable MDMA controller clock
-  */
+ * Enable MDMA controller clock
+ */
 static void MX_MDMA_Init(void)
 {
 
@@ -942,14 +944,13 @@ static void MX_MDMA_Init(void)
   /* MDMA_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(MDMA_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(MDMA_IRQn);
-
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -969,11 +970,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(USB_RST_GPIO_Port, USB_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, FPGA_SPI_CS_Pin|DA_CS_Pin|DOUT_1_Pin|DOUT_2_Pin
-                          |FRAM_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, FPGA_SPI_CS_Pin | DA_CS_Pin | DOUT_1_Pin | DOUT_2_Pin | FRAM_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, AD_RESET_Pin | AD_RANGE_Pin | AD_OS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
@@ -989,14 +989,14 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(USB_RST_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : FPGA_SPI_CS_Pin DA_CS_Pin FRAM_CS_Pin */
-  GPIO_InitStruct.Pin = FPGA_SPI_CS_Pin|DA_CS_Pin|FRAM_CS_Pin;
+  GPIO_InitStruct.Pin = FPGA_SPI_CS_Pin | DA_CS_Pin | FRAM_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : AD_RESET_Pin AD_RANGE_Pin AD_OS_Pin */
-  GPIO_InitStruct.Pin = AD_RESET_Pin|AD_RANGE_Pin|AD_OS_Pin;
+  GPIO_InitStruct.Pin = AD_RESET_Pin | AD_RANGE_Pin | AD_OS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1010,7 +1010,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DOUT_1_Pin DOUT_2_Pin */
-  GPIO_InitStruct.Pin = DOUT_1_Pin|DOUT_2_Pin;
+  GPIO_InitStruct.Pin = DOUT_1_Pin | DOUT_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1033,9 +1033,9 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -1048,12 +1048,12 @@ void Error_Handler(void)
 }
 #ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

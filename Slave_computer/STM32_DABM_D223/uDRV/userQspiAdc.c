@@ -1,130 +1,42 @@
 #include "main.h"
-__UADC _uadc;
+
 extern TIM_HandleTypeDef htim13;
 extern TIM_HandleTypeDef htim14;
 
-f2a_qspiAdcBufSturct _qspiAdcBuf;
+__UADC _uadc;
+
+/* QSPI DMA æ¥æ”¶ç¼“å†²: 8 é€šé“ x 2 å­—èŠ‚ + 1 å­—èŠ‚ DIN = 17 å­—èŠ‚ */
+static u8 _adcRxBuf[17];
+
+/* FPGA è¿”å›çš„ ADC æ•°æ® (QSPI cmd 0x80) æ’åˆ—ä¸º:
+ *   [0..1] é€šé“0 (å°ç«¯) ... [14..15] é€šé“7
+ *   [16]   æ•°å­—è¾“å…¥
+ */
 void HAL_QSPI_RxCpltCallback(QSPI_HandleTypeDef *hqspi)
 {
-
-  if (_adcFunctionParam.deviceWorkMode == _deviceWorkMode_onlineRecord)
-  {
-    //__disable_irq();
-    // È«²¿È«¾Ö±äÁ¿Ò»´ÎĞÔ»º´æµ½¾Ö²¿£¬¼õÉÙRAM·ÃÎÊ
-    const uint16_t gapCnt = _uadc.adc_BufIndexGap;
-    const uint8_t chMask = _framDatas._adcParam.adc_ch_Enable;
-    const uint16_t maxPoint = _adcFunctionParam.recordOnce_MaxDataLen;
-    uint16_t idx = _uadc.adc_collectIndex;
-    uint8_t bufFlag = _uadc.recordAB_flag;
-
-    uint16_t *pDst;
-    uint8_t nextFlag, fullFlag;
-    if (bufFlag == 0)
-    {
-      pDst = _adcBuf.data;
-      nextFlag = 1;
-      fullFlag = 2;
-    }
-    else
-    {
-      pDst = _adcBufB.data;
-      nextFlag = 0;
-      fullFlag = 3;
-    }
-
-    for (uint16_t j = 0; j < gapCnt; j++)
-    {
-      for (uint8_t i = 0; i < 8; i++)
-      {
-        if (!(chMask & (1U << i)))
-          continue;
-
-        uint16_t rawVal = SWAP16(_qspiAdcBuf.fifo[j].data[i]);
-        if (rawVal > 100)
-        {
-          int i123 = 0;
-        }
-        if (idx < maxPoint - 1)
-        {
-          pDst[idx++] = rawVal;
-        }
-        else if (idx == maxPoint - 1)
-        {
-          // ÌîÂúÕû¿é»º´æ
-          pDst[idx] = rawVal;
-          idx = 0;
-          _uadc.recordAB_flag = nextFlag;
-          _adcFunctionParam.adc_collectFullFlag = fullFlag;
-          // Ò»´ÎĞÔÌø³öË«²ãÑ­»·£¬²»ÔÙ½âÎöÊ£ÓàFIFO
-          goto parse_end_all;
-        }
-      }
-    }
-  parse_end_all:
-    // ½ö×îºóĞ´»Ø¸üĞÂºóµÄË÷Òı£¬¼õÉÙÈ«¾ÖĞ´Èë´ÎÊı
-    _uadc.adc_collectIndex = idx;
-    //__enable_irq();
-  }
-  else if ((_adcFunctionParam.deviceWorkMode != _deviceWorkMode_sramRecord) && (_adcFunctionParam.deviceWorkMode != _deviceWorkMode_getSramRecord))
-  {
-    _uadc.adc_collectIndex = 0;
-    _uadc.recordAB_flag = 0;
-
-    for (u16 i = 0; i < 8; i++)
-    {
-      _uadc.getAdc_Buf1000[i][_uadc.getAdc_BufIndex1000] = _uadc.getAdc[i];
-      _uadc.getAdc_Buf256[i][_uadc.getAdc_BufIndex256] = _uadc.getAdc[i];
-    }
-    _uadc.getAdc_BufIndex256++;
-    _uadc.getAdc_BufIndex1000++;
-    _uadc.getAdc_BufIndex1000 %= 1000;
-    _dioParam.dinAll = _uadc.getAdc[8] & 0xff;
-    _adcFunctionParam.global_tick_ms++;
-  }
+  memcpy(_uadc.adc, _adcRxBuf, 16);
+  _uadc.din = _adcRxBuf[16];
+  _dioParam.dinAll = _uadc.din;
+  _uadc.newFlag = 1;
 }
 
 void qspiAdcTimTask(void)
 {
-  // Èç¹ûÊÇÔÚÏß¼ÇÂ¼ÒÇÄ£Ê½
-  _uadc.adc_BufIndexHis = _uadc.adc_BufIndex;
-  irq_spi_read();
-  if (_adcFunctionParam.deviceWorkMode == _deviceWorkMode_onlineRecord)
-  {
-    // ÔÚÏß¼ÇÂ¼Ä£Ê½£¬FPGA Ğ´Êı¾İ£¬STM32Ã¿¹ıÒ»¸ö¶¨Ê±Æ÷ÖÜÆÚÈ¡×ßÒ»´Î
-    _uadc.adc_BufIndex = _regF2AMap.REG_F2A_FIFO_IN_ADDR;
-    _uadc.adc_BufIndexGap = (_uadc.adc_BufIndex - _uadc.adc_BufIndexHis);
-    if (_uadc.adc_BufIndexGap == 0)
-      return;
-    QSPI_ReadDatas_DMA(0x81, 2, (u8 *)&_qspiAdcBuf, _uadc.adc_BufIndexHis, _uadc.adc_BufIndexGap * 17);
-  }
-  else if (_adcFunctionParam.deviceWorkMode != _deviceWorkMode_getSramRecord)
-  {
-    //SRAMÄ£Ê½£¬FAGA×Ô¼ºĞ´Âú£¬STM32Ò»´ÎÈ¡×ß
-    QSPI_ReadDatas_DMA(0x80, 2, (u8 *)&_uadc.getAdc, 0, 17);
-  }
+  /* è¯»å– FPGA å½“å‰ 8 é€šé“ ADC åŸå§‹å€¼ */
+  QSPI_ReadDatas_DMA(0x80, 2, _adcRxBuf, 0, 17);
 }
 
 void adc_dac_paramCalcThread(void)
 {
-  // adcµÄ¶¨Ê±Æ÷
-  // ¼ÆËãarr(pcsÔ¤ÉèÎª0)
-  u32 adcFreq = _framDatas._adcParam.samplingRate;
-  //	if(_adcFunctionParam.deviceWorkMode == _deviceWorkMode_onlineRecord)
-  //	{
-  //		adcFreq /= 3;
-  //		adcFreq += 1000;
-  //	}
-
-  adcFreq = 1000;
+  /* ADC è¯»å–æ—¶åŸºå›ºå®š 1kHz */
+  u32 adcFreq = 1000;
   u32 adcArr = 240000000 / adcFreq;
-  // ¸ù¾İarr¼ÆËãpsc, ½«arrÈ¡Óà
   u32 adcPsc = adcArr / 0x10000;
   adcArr = adcArr / (adcPsc + 1);
 
   htim13.Instance->ARR = adcArr - 1;
   htim13.Instance->PSC = adcPsc;
 
-  // dacµÄ¶¨Ê±Æ÷
-  u32 dacFreq = _framDatas.dacOutRate;
-  htim14.Instance->ARR = 1000000 / dacFreq - 1;
+  /* DAC è¾“å‡ºæ—¶åŸº */
+  htim14.Instance->ARR = 1000000 / _framDatas.dacOutRate - 1;
 }

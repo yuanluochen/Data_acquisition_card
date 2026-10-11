@@ -1,6 +1,6 @@
 #include "main.h"
 
-//FRAM数据
+// FRAM数据
 framDatas _framDatas;
 
 void nvm_data_init(void)
@@ -23,7 +23,7 @@ void fram_read_datas(void)
 {
   // 读取fram中数据到RAM
   FramRead((u8 *)&_framDatas, FRAM_BASE_ADDR, FRAM_DATA_LENGTH);
-  //FRAM数据校验
+  // FRAM数据校验
   if (_framDatas.softVersion != 0x00300002)
   {
     _framDatas.softVersion = 0x00300002;
@@ -32,6 +32,8 @@ void fram_read_datas(void)
     _framDatas._adcParam.samplingRate = 500000;
     _framDatas._adcParam.sramRecordMaxTime = 300;
     _framDatas._adcParam.sramAdutoTrigEnable = 0;
+    _framDatas._adcParam.adcRange = 1; // 默认量程: 1=±10V, 0=±5V
+    
 
     for (u8 i = 0; i < 8; i++)
     {
@@ -80,8 +82,9 @@ void fram_read_datas(void)
     fram_write_datas();
     fram_read_datas();
   }
-  
 
+  // 强制默认量程: 1=±10V, 0=±5V (即使 FRAM 里是旧值也生效, 由 dio_tim_task 写入 AD_RANGE 引脚)
+  _framDatas._adcParam.adcRange = 1;
   _framDatas._adcParam.samplingRate = _framDatas._adcParam.samplingRate > ADC_MAX_FREQ ? ADC_MAX_FREQ : _framDatas._adcParam.samplingRate;
   _framDatas._adcParam.samplingRate = _framDatas._adcParam.samplingRate < 1 ? 1 : _framDatas._adcParam.samplingRate;
   _framDatas.dacOutRate = _framDatas.dacOutRate > 20000 ? 20000 : _framDatas.dacOutRate;
